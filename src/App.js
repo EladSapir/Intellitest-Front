@@ -14,7 +14,6 @@ function App() {
       <GlobalStyle />
       <Header />
       <MainSection />
-      <Login />
       <Features />
       <ImageSection />
       <Footer />

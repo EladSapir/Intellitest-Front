@@ -2,26 +2,48 @@
   display: flex;
   justify-content: space-around;
   padding: 50px 20px;
-  flex-wrap: wrap; /* Added to allow wrapping */
+  flex-wrap: wrap;
+}
+
+.features-title{
+  display: flex;
+  justify-content: center;
+}
+.features-title h4{
+  font-size: 40px;
+  color: black;
+  font-weight: 700;
+  justify-content: space-around;
 }
 
 .feature-box {
-  width: 402px;
-  height: 250px;
+  width: 400px;
+  height: 300px;
   text-align: center;
   padding: 32px 48px;
   background: #fff;
   box-shadow: none;
-  border-radius: 20px ;
+  border-radius: 20px;
   border: 1px solid #ccc;
-  margin: 10px; /* Added margin for spacing */
-  opacity: 1; /* Ensure the boxes are visible */
+  margin: 10px;
+  transition: all 0.3s ease;
+}
+
+.feature-box:hover {
+  width: 415px;
+  height: 305px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .feature-title {
   font-size: 20px;
   color: #333;
   font-weight: 700;
+  transition: font-size 0.3s ease;
+}
+
+.feature-box:hover .feature-title {
+  font-size: 24px;
 }
 
 .feature-description {
@@ -29,24 +51,20 @@
   color: #666;
   line-height: 1.5;
   font-weight: 400;
+  transition: font-size 0.3s ease;
 }
 
-.features-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 40px;
-  text-align: center;
-  color: black;
+.feature-box:hover .feature-description {
+  font-size: 19px;
 }
 
-.feature-friendly-icon{
-  width:53px ;
-  height: 50px;
+.feature-icon {
+  width: 58px;
+  height: 58px;
+  transition: all 0.3s ease;
 }
-.feature-simple-icon{
-  width: 44px;
-  height: 44px;
-}
-.feature-realtime-icon{
-  width: 44px; ;
-  height: 51px;
+
+.feature-box:hover .feature-icon {
+  width: 60px;
+  height: 60px;
 }

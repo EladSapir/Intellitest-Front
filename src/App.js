@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      {/* <Header />
+      <Header />
       <div className="content-container">
         <div className="background-image">
           <img src={bgImg} alt="bgImage" className="bg-img" />
@@ -23,8 +23,8 @@ function App() {
         <Features />
         <ImageSection />  
       </div>
-      <Footer /> */}
-      <Dashboard />
+      <Footer />
+      {/* <Dashboard /> */}
     </div>
   );
 }

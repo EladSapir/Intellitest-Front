@@ -1,0 +1,29 @@
+.text-section {
+    margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .title {
+    font-family: 'Inter', sans-serif;
+    font-size: 104px;
+    font-weight: 800;
+    line-height: 125.86px;
+    text-align: left;
+    color: black;
+  }
+  
+  .title-second-line {
+    display: block;
+  }
+  
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 48.41px;
+    text-align: left;
+    color: black;
+  }
+  

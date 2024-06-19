@@ -5,6 +5,8 @@ import './MainSection.css';
 const MainSection = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -12,6 +14,55 @@ const MainSection = () => {
 
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
+    setErrors({});
+    setIsFormValid(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    let newErrors = { ...errors };
+
+    // Validation logic
+    switch (id) {
+      case 'full-name':
+        newErrors.fullName = value.trim() === '' ? 'Full Name is required' : '';
+        break;
+      case 'email':
+        newErrors.email = !/\S+@\S+\.\S+/.test(value) ? 'Please enter a valid email address (example@ex.com)' : '';
+        break;
+      case 'password':
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+        if (isSignUp) {
+          newErrors.password = !passwordRegex.test(value)
+            ? 'Password must be at least 8 characters, contain 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character'
+            : '';
+        } else {
+          newErrors.password = value.trim() === '' ? 'Password is required' : '';
+        }
+        break;
+      case 'repeat-password':
+        newErrors.repeatPassword = value !== document.getElementById('password').value ? 'Passwords do not match' : '';
+        break;
+      default:
+        break;
+    }
+
+    setErrors(newErrors);
+    if (isSignUp) {
+      setIsFormValid(
+        value.trim() !== '' &&
+        newErrors.fullName === '' &&
+        newErrors.email === '' &&
+        newErrors.password === '' &&
+        newErrors.repeatPassword === ''
+      );
+    } else {
+      setIsFormValid(
+        value.trim() !== '' &&
+        newErrors.email === '' &&
+        newErrors.password === ''
+      );
+    }
   };
 
   return (
@@ -25,17 +76,31 @@ const MainSection = () => {
           <h2 className="subtitle">Join the Future Today!</h2>
         </div>
         <div className="login-section">
-          <div className="form-container"> {/* Center content vertically */}
+          <div className="form-container">
             {isSignUp ? (
               <div className="login-form sign-up-form">
                 <h3 className="login-title">Sign up</h3>
                 <div className="input-group">
                   <label htmlFor="full-name" className="input-label">Full Name</label>
-                  <input type="text" id="full-name" placeholder="Full Name Here" className="input" />
+                  <input 
+                    type="text" 
+                    id="full-name" 
+                    placeholder="Full Name Here" 
+                    className={`input ${errors.fullName ? 'input-error' : ''}`}
+                    onChange={handleInputChange} 
+                  />
+                  {errors.fullName && <p className="error-message">{errors.fullName}</p>}
                 </div>
                 <div className="input-group">
                   <label htmlFor="email" className="input-label">Email Address</label>
-                  <input type="email" id="email" placeholder="Enter Email Address" className="input" />
+                  <input 
+                    type="email" 
+                    id="email" 
+                    placeholder="Enter Email Address" 
+                    className={`input ${errors.email ? 'input-error' : ''}`}
+                    onChange={handleInputChange} 
+                  />
+                  {errors.email && <p className="error-message">{errors.email}</p>}
                 </div>
                 <div className="input-group">
                   <label htmlFor="password" className="input-label">Password</label>
@@ -44,12 +109,14 @@ const MainSection = () => {
                       type={showPassword ? 'text' : 'password'}
                       id="password"
                       placeholder="Enter Password"
-                      className="input"
+                      className={`input ${errors.password ? 'input-error' : ''}`}
+                      onChange={handleInputChange}
                     />
                     <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
                       <img src={eye} alt="Toggle visibility" className="eye-icon" />
                     </button>
                   </div>
+                  {errors.password && <p className="error-message">{errors.password}</p>}
                 </div>
                 <div className="input-group">
                   <label htmlFor="repeat-password" className="input-label">Repeat Password</label>
@@ -58,12 +125,14 @@ const MainSection = () => {
                       type={showPassword ? 'text' : 'password'}
                       id="repeat-password"
                       placeholder="Enter Password"
-                      className="input"
+                      className={`input ${errors.repeatPassword ? 'input-error' : ''}`}
+                      onChange={handleInputChange}
                     />
                     <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
                       <img src={eye} alt="Toggle visibility" className="eye-icon" />
                     </button>
                   </div>
+                  {errors.repeatPassword && <p className="error-message">{errors.repeatPassword}</p>}
                 </div>
                 <div className="input-group">
                   <label className="input-label">Type of use</label>
@@ -78,7 +147,7 @@ const MainSection = () => {
                     </label>
                   </div>
                 </div>
-                <button className="login-button">Sign up</button>
+                <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} disabled={!isFormValid}>Sign up</button>
                 <div className="login-footer">
                   <p>
                     Have an account? <a href="#" className="login-link" onClick={toggleForm}>Login</a>
@@ -91,7 +160,14 @@ const MainSection = () => {
                 <div className="input-group">
                   <label htmlFor="email" className="input-label">Email Address</label>
                   <div className="input-wrapper">
-                    <input type="email" id="email" placeholder="Enter Email Address" className="input" />
+                    <input 
+                      type="email" 
+                      id="email" 
+                      placeholder="Enter Email Address" 
+                      className={`input ${errors.email ? 'input-error' : ''}`}
+                      onChange={handleInputChange} 
+                    />
+                    {errors.email && <p className="error-message">{errors.email}</p>}
                   </div>
                 </div>
                 <div className="input-group">
@@ -101,12 +177,14 @@ const MainSection = () => {
                       type={showPassword ? 'text' : 'password'}
                       id="password"
                       placeholder="Enter Password"
-                      className="input"
+                      className={`input ${errors.password ? 'input-error' : ''}`}
+                      onChange={handleInputChange}
                     />
                     <button type="button" className="password-toggle" onClick={togglePasswordVisibility}>
                       <img src={eye} alt="Toggle visibility" className="eye-icon" />
                     </button>
                   </div>
+                  {errors.password && <p className="error-message">{errors.password}</p>}
                 </div>
                 <div className="remember-me">
                   <input type="checkbox" id="keep-signed-in" />
@@ -115,7 +193,7 @@ const MainSection = () => {
                 <p className="remember-me-warning">
                   Not your device? Use a private browsing window to sign in and close it when you're done.
                 </p>
-                <button className="login-button">Log in</button>
+                <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} disabled={!isFormValid}>Log in</button>
                 <div className="login-footer">
                   <p>
                     Forgot your password? <a href="#" className="reset-password">Reset Your Password</a>

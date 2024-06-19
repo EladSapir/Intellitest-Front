@@ -19,9 +19,9 @@ function App() {
         </div>
         <MainSection />
         <Features />
-        <ImageSection />
-        <Footer />
+        <ImageSection />  
       </div>
+      <Footer />
     </div>
   );
 }

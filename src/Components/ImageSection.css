@@ -45,9 +45,18 @@ p {
   border-radius: 5px;
 }
 
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 20px;
+  background:transparent ;
+}
+
 .image {
   width: 686px;
   height: auto;
   border-radius: 10px;
   margin-right: 100px;
 }
+

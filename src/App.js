@@ -6,7 +6,7 @@ import ImageSection from './Components/ImageSection';
 import Footer from './Components/Footer';
 import './App.css';
 import GlobalStyle from './GlobalStyle';
-import bgImg from './Images/BG Image.png';
+import bgImg from './Images/Logo.svg';
 
 function App() {
   return (

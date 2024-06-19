@@ -1,0 +1,36 @@
+.delete-module {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .delete-module-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .delete-module-content i {
+    font-size: 24px;
+    color: #ff4d4f;
+  }
+  
+  .delete-module-content span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4f;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  

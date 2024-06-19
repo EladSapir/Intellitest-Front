@@ -7,12 +7,14 @@ import Footer from './Components/Footer';
 import './App.css';
 import GlobalStyle from './GlobalStyle';
 import bgImg from './Images/Logo.svg';
+import Dashboard from './Dashboard-Components/Dashboard';
+
 
 function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <Header />
+      {/* <Header />
       <div className="content-container">
         <div className="background-image">
           <img src={bgImg} alt="bgImage" className="bg-img" />
@@ -21,7 +23,8 @@ function App() {
         <Features />
         <ImageSection />  
       </div>
-      <Footer />
+      <Footer /> */}
+      <Dashboard />
     </div>
   );
 }

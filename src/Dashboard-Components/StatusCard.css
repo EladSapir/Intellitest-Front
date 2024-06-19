@@ -1,0 +1,21 @@
+.status-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .status-card h3 {
+    margin: 0;
+  }
+  
+  .status-card p {
+    font-size: 24px;
+    margin: 10px 0 0 0;
+  }
+  

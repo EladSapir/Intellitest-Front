@@ -11,7 +11,7 @@ import './Features.css';
 const Features = () => (
   <div>
     <div className='features-title'>
-      <h4>Why Partner with Us?</h4>
+      <h3>Why Partner with Us?</h3>
     </div>
     <div className="features-container">
       <div className="feature-box" onMouseEnter={e => handleMouseEnter(e, friendlyIconHover)} onMouseLeave={e => handleMouseLeave(e, friendlyIconDefault)}>

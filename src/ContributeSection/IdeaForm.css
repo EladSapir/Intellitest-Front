@@ -1,0 +1,52 @@
+/* IdeaForm.css */
+.idea-form {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .idea-form h3 {
+    margin-top: 0;
+    font-family: Inter;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36.31px;
+  }
+  
+  .idea-form h4 {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24.2px;
+    text-align: center;
+  }
+  
+  .idea-form input,
+  .idea-form textarea {
+    width: 96%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .send-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: rgba(253, 224, 71, 1);
+    border: 1px rgba(250, 204, 21, 1);
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .inputs-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+  

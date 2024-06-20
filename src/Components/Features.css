@@ -1,7 +1,9 @@
 .features-container {
   display: flex;
   justify-content: space-around;
-  padding: 50px 20px;
+  padding: 50px 100px;
+  margin-left: 50px;
+  margin-right: 50px;
   flex-wrap: wrap;
 }
 
@@ -10,16 +12,16 @@
   display: flex;
   justify-content: center;
 }
-.features-title h4{
-  font-size: 40px;
+.features-title h3{
+  font-size: 30px;
   color: black;
   font-weight: 700;
   justify-content: space-around;
 }
 
 .feature-box {
-  width: 400px;
-  height: 300px;
+  width: 300px;
+  height: 250px;
   text-align: center;
   padding: 32px 48px;
   background: #fff;
@@ -31,8 +33,8 @@
 }
 
 .feature-box:hover {
-  width: 415px;
-  height: 305px;
+  width: 330px;
+  height: 270px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 

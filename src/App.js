@@ -8,6 +8,7 @@ import './App.css';
 import GlobalStyle from './GlobalStyle';
 import bgImg from './Images/Logo.svg';
 import Dashboard from './Dashboard-Components/Dashboard';
+import Contribute from './ContributeSection/ContributeSection'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <MainSection />
         <Features />
         <ImageSection />  
+        <Contribute/>
       </div>
       <Footer />
       {/* <Dashboard /> */}

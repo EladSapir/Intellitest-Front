@@ -1,21 +1,110 @@
 .status-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align content to both ends */
+  gap: 20px;
+}
+
+.status-card .content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-icon {
+  font-size: 32px;
+}
+
+.text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+}
+
+.text p {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 400;
+  color: #000;
+}
+
+
+.text small {
+  display: block;
+  font-size: 14px;
+  color: #666;
+}
+
+.status-link {
+  font-size: 14px;
+  color: black; /* Keep the link color black */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.status-link:hover {
+  color: #666;
+}
+
+/* Added CSS for the glowing green circle */
+.ring-container {
+  position: relative;
+  width: 25px;
+  height: 25px;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  background-color: #62bd19;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 8px;
+}
+
+.ringring {
+  border: 3px solid #62bd19;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  left: 0;
+  top: -3px;
+  animation: pulsate 1s ease-out infinite; 
+  opacity: 0.0;
+}
+
+@-webkit-keyframes pulsate {
+  0% {
+      -webkit-transform: scale(0.1, 0.1);
+      opacity: 0.0;
   }
-  
-  .status-card h3 {
-    margin: 0;
+  50% {
+      opacity: 1.0;
   }
-  
-  .status-card p {
-    font-size: 24px;
-    margin: 10px 0 0 0;
+  100% {
+      -webkit-transform: scale(1.2, 1.2);
+      opacity: 0.0;
   }
-  
+}
+
+@keyframes pulsate {
+  0% {
+      transform: scale(0.1, 0.1);
+      opacity: 0.0;
+  }
+  50% {
+      opacity: 1.0;
+  }
+  100% {
+      transform: scale(1.2, 1.2);
+      opacity: 0.0;
+  }
+}

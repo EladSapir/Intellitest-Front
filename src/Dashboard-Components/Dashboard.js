@@ -10,7 +10,9 @@ const Dashboard = () => {
   const [statusData, setStatusData] = useState({
     liveLearningCycle: '',
     lastAccuracyPercentage: '',
-    lastLearningCycle: ''
+    lastLearningCycle: '',
+    lastLearningCycleTime: '',
+    isLearning: false
   });
 
   const [username, setUsername] = useState('');
@@ -23,7 +25,9 @@ const Dashboard = () => {
         setStatusData({
           liveLearningCycle: data.liveLearningCycle,
           lastAccuracyPercentage: data.lastAccuracyPercentage,
-          lastLearningCycle: data.lastLearningCycle
+          lastLearningCycle: data.lastLearningCycle,
+          lastLearningCycleTime: data.lastLearningCycleTime,
+          isLearning: data.isLearning
         });
       });
 
@@ -36,20 +40,52 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard-container">
-      <NavBar username={username} />
-      <div className="dashboard">
-        <div className="status-cards">
-          <StatusCard title="Live Learning Cycle" value={statusData.liveLearningCycle} />
-          <StatusCard title="Last Accuracy Percentage" value={statusData.lastAccuracyPercentage} />
-          <StatusCard title="Last Learning Cycle" value={statusData.lastLearningCycle} />
-          <StatusCard title="Update CSV" value="Update" />
+    <div className="dashboard-wrapper">
+      <div className="dashboard-container">
+        <NavBar username={username} />
+        <div className="dashboard">
+          <div className="status-cards">
+            {statusData.isLearning ? (
+              <StatusCard
+                title="Live Learning Cycle"
+                value={statusData.liveLearningCycle}
+                isLiveLearning={true}
+              />
+            ) : (
+              <StatusCard
+                title="New Learning Cycle"
+                value=""
+                icon="play_arrow"
+                iconColor="#FACC15"
+              />
+            )}
+            <StatusCard
+              title="Last Accuracy Percentage"
+              value={statusData.lastAccuracyPercentage}
+              icon="track_changes"
+              iconColor="#FACC15"
+            />
+            <StatusCard
+              title="Last Learning Cycle"
+              value={statusData.lastLearningCycle}
+              icon="menu_book"
+              iconColor="#FACC15"
+              subtitle={statusData.lastLearningCycleTime}
+            />
+            <StatusCard
+              title="Update CSV"
+              value=""
+              icon="file_upload"
+              iconColor="#FACC15"
+              link={{ url: "#", text: "Update" }}
+            />
+          </div>
+          <div className="charts">
+            <HistoryGraph />
+            <ConfusionMatrix />
+          </div>
+          <DeleteModule />
         </div>
-        <div className="charts">
-          <HistoryGraph />
-          <ConfusionMatrix />
-        </div>
-        <DeleteModule />
       </div>
     </div>
   );

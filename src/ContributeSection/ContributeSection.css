@@ -1,4 +1,5 @@
 /* ContributeSection.css */
+
 .contribute-section {
   padding: 20px;
   margin-left: 300px;
@@ -6,7 +7,7 @@
   text-align: center;
 }
 
-.title{
+.contribute-title {
   font-family: 'Inter', sans-serif;
   font-size: 30px;
   text-align: center;
@@ -36,21 +37,67 @@
   text-align: center;
 }
 
-.contact-card img {
+.contact-card img.profile-pic {
   border-radius: 50%;
+  border: 4px solid rgba(253, 224, 71, 1); /* Add yellow border to profile pictures only */
+  width: 68px; /* Ensure consistent size */
+  height: 68px; /* Ensure consistent size */
 }
 
-.social-links a {
-  display: block;
+.contact-card h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  margin: 0 0 0 10px; /* Ensure margin to the left */
+}
+
+.contact-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 10px;
 }
 
-.idea-section {
-  width: 50%;
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align the content to the start */
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.social-link a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black; /* Ensure link color is black */
+}
+
+.social-link img {
+  margin-right: 15px;
+  margin-left: 2px;
+  margin-top:15px;
+  border: none; /* Remove border from icons */
+  width: 38px; /* Ensure consistent size */
+  height: 38px; /* Ensure consistent size */
+}
+
+.social-link span {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  margin-top:15px;
 }
 
 .come-say-hi {
-  font-family: 'Inter',sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 24px;
   font-weight: 700;
   text-align: center;

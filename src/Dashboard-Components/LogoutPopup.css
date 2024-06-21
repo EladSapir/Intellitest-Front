@@ -1,0 +1,77 @@
+.logout-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .logout-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .logout-popup h2 {
+    margin-bottom: 10px;
+  }
+  
+  .logout-popup p {
+    margin-bottom: 20px;
+  }
+  
+  .logout-popup-buttons {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .logout-button, .stay-in-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button {
+    background: none;
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #6c757d;
+    text-underline-offset: 3px;
+  }
+  
+  .stay-in-button {
+    background-color: #FDE047;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 25px;
+    border: 2px solid #FACC15;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .stay-in-button:hover {
+    background-color: #fff8c6;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

@@ -1,38 +1,39 @@
 import React from 'react';
 import './ContributeSection.css';
 import IdeaForm from './IdeaForm';
-import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import linkedIn from '../Images/LinkedIn.svg'
+import gitHub from '../Images/gitHub.svg'
+
 
 const ContributeSection = () => {
   return (
     <div className="contribute-section">
-      <h2>Wanna Contribute?</h2>
+      <h2 className='title'>Wanna Contribute?</h2>
 
       <div className="contribute-content">
         <div className="contact-section">
-          <div className="contact-card">
-            <img src="path/to/elad-image.jpg" alt="Elad Sapir" />
-            <h3>Elad Sapir</h3>
-            <div className="social-links">
-              <a href="https://www.linkedin.com/in/elad-sapir"><FaLinkedin size={30} /></a>
-              <a href="https://github.com/elad-sapir"><FaGithub size={30} /></a>
+          <h3 className="come-say-hi">Come say hi!</h3>
+          <div className="contact-cards">
+            <div className="contact-card">
+              <img src="path/to/elad-image.jpg" alt="Elad Sapir" />
+              <h3>Elad Sapir</h3>
+              <div className="social-links">
+                <a href="https://www.linkedin.com/in/elad-sapir"><img src={linkedIn} alt="linkedIn1" /></a>
+                <a href="https://github.com/elad-sapir"><img src={gitHub} alt="GitHub1" /></a>
+              </div>
             </div>
-          </div>
-          
-          <div className="come-say-hi">
-            <h4>Come say hi!</h4>
-          </div>
 
-          <div className="contact-card">
-            <img src="path/to/solal-image.jpg" alt="Solal Ohana" />
-            <h3>Solal Ohana</h3>
-            <div className="social-links">
-              <a href="https://www.linkedin.com/in/solal-ohana"><FaLinkedin size={30} /></a>
-              <a href="https://github.com/solal-ohana"><FaGithub size={30} /></a>
+            <div className="contact-card">
+              <img src="path/to/solal-image.jpg" alt="Solal Ohana" />
+              <h3>Solal Ohana</h3>
+              <div className="social-links">
+                <a href="https://www.linkedin.com/in/solal-ohana"><img src={linkedIn} alt="linkedIn2" /></a>
+                <a href="https://github.com/solal10"><img src={gitHub} alt="GitHub2" /></a>
+              </div>
             </div>
           </div>
         </div>
-        
+
         <div className="idea-section">
           <IdeaForm />
         </div>

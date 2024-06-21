@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './LoginForm.css';
 
@@ -10,6 +11,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     email: '',
     password: '',
   });
+  const [loginStatus, setLoginStatus] = useState('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -42,10 +44,21 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isFormValid) {
-      onSubmit(formData);
+      try {
+        const response = await axios.post('https://intellitest-backend.onrender.com/user/login', formData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        setLoginStatus('Login successful!');
+        // Handle the successful login response here, e.g., save token, redirect, etc.
+      } catch (error) {
+        setLoginStatus('Login failed: ' + (error.response ? error.response.data.message : error.message));
+        // Handle the error response here
+      }
     }
   };
 
@@ -89,6 +102,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
         Not your device? Use a private browsing window to sign in and close it when you're done.
       </p>
       <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} type="submit" disabled={!isFormValid}>Log in</button>
+      <p className="login-status">{loginStatus}</p>
       <div className="login-footer">
         <p>
           Forgot your password? <a href="#" className="reset-password">Reset Your Password</a>

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './LoginForm.css';
+const backend = process.env.DB_PASS;
+
 
 const LoginForm = ({ toggleForm, onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +50,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     e.preventDefault();
     if (isFormValid) {
       try {
-        const response = await axios.post('http://localhost:4000/user/login', formData, {
+        const response = await axios.post(`${backend}/user/login`, formData, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -61,7 +63,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
         onSubmit(userData);
         setLoginStatus('Login successful!');
       } catch (error) {
-        setLoginStatus('Login failed: ' + (error.response ? error.response.data.message : error.message));
+        setLoginStatus('Login failed: ' + (error.response ? error.response.data.error : error.message));
       }
     }
   };
@@ -106,7 +108,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
         Not your device? Use a private browsing window to sign in and close it when you're done.
       </p>
       <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} type="submit" disabled={!isFormValid}>Log in</button>
-      <p className="login-status">{loginStatus}</p>
+      {loginStatus && <p className={`login-status ${loginStatus.includes('failed') ? 'error' : ''}`}>{loginStatus}</p>}
       <div className="login-footer">
         <p>
           Forgot your password? <a href="#" className="reset-password">Reset Your Password</a>

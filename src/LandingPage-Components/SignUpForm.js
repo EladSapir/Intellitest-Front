@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './SignUpForm.css';
+const backend = process.env.DB_PASS;
+
 
 const SignUpForm = ({ toggleForm, onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,7 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     password: '',
     repeatPassword: '',
   });
+  const [signUpStatus, setSignUpStatus] = useState('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -62,7 +65,8 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     e.preventDefault();
     if (isFormValid) {
       try {
-        const response = await axios.post('http://localhost:4000/user/register', {
+        console.log(`${backend}/user/register`)
+        const response = await axios.post(`${backend}/user/register`, {
           fullname: formData.fullName,
           email: formData.email,
           password: formData.password,
@@ -78,8 +82,9 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
           email: response.data.Email
         };
         onSubmit(userData);
+        setSignUpStatus('Sign-up successful!');
       } catch (error) {
-        // Handle the error response here
+        setSignUpStatus('Sign-up failed: ' + (error.response ? error.response.data.error : error.message));
       }
     }
   };
@@ -155,6 +160,7 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
         </div>
       </div>
       <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} type="submit" disabled={!isFormValid}>Sign up</button>
+      {signUpStatus && <p className={`sign-up-status ${signUpStatus.includes('failed') ? 'error' : ''}`}>{signUpStatus}</p>}
       <div className="login-footer">
         <p>
           Have an account? <a href="#" className="login-link" onClick={toggleForm}>Login</a>

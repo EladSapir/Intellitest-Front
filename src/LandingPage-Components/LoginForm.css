@@ -124,6 +124,13 @@
     color: green;
   }
   
-  .login-status.error {
+  .login-status, .sign-up-status {
+    margin-top: 20px;
+    font-size: 14px;
+    color: green;
+  }
+  
+  .login-status.error, .sign-up-status.error {
     color: red;
   }
+  

@@ -7,6 +7,7 @@ import Footer from './Components/Footer';
 import './App.css';
 import GlobalStyle from './GlobalStyle';
 import bgImg from './Images/Logo.svg';
+import bgImg2 from './Images/BG2.svg';
 import Dashboard from './Dashboard-Components/Dashboard';
 import Contribute from './ContributeSection/ContributeSection'
 
@@ -24,6 +25,9 @@ function App() {
         <Features />
         <ImageSection />  
         <Contribute/>
+        <div className="background-image2">
+          <img src={bgImg2} alt="bgImage2" className="bg-img2" />
+        </div>
       </div> 
        <Footer />
       {/* <Dashboard /> */}

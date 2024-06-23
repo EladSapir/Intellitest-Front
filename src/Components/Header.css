@@ -16,14 +16,15 @@
 }
 
 .logo-text {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
 }
 
 .nav-links {
+  font-family: 'Inter',sans-serif;
   display: flex;
-  gap: 20px;
-  font-size: 24px;
-  margin-left: 166px;
+  gap: 35px;
+  font-size: 20px;
+  margin-left: 950px;
   font-weight: 500;
 }

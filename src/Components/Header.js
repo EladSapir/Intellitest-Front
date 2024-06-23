@@ -9,7 +9,7 @@ const Header = () => (
       <span className="logo-text">IntelliTest</span>
     </div>
     <div className="nav-links">
-      <a href="#">Why</a>
+      <a href="#">Contact Us</a>
       <a href="#">Buy us a coffee</a>
     </div>
   </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import './MainSection.css';
-import TitleSection from '../LandingPage-Components/TitleSection';
-import LoginForm from '../LandingPage-Components/LoginForm';
-import SignUpForm from '../LandingPage-Components/SignUpForm';
+import TitleSection from './TitleSection';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
 const MainSection = () => {
   const [isSignUp, setIsSignUp] = React.useState(false);

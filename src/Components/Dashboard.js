@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from './NavBar';
-import HistoryGraph from './HistoryGraph';
-import ConfusionMatrix from './ConfusionMatrix';
-import StatusCard from './StatusCard';
-import DeleteModule from './DeleteModule';
+import NavBar from '../Dashboard-Components/NavBar';
+import HistoryGraph from '../Dashboard-Components/HistoryGraph';
+import ConfusionMatrix from '../Dashboard-Components/ConfusionMatrix';
+import StatusCard from '../Dashboard-Components/StatusCard';
+import DeleteModule from '../Dashboard-Components/DeleteModule';
 import './Dashboard.css';
 
 const Dashboard = () => {

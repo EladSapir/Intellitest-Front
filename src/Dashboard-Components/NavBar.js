@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
 
-const NavBar = ({ username }) => {
-  const initials = username.substring(0, 2).toUpperCase();
+const NavBar = ({ user }) => {
+  const initials = user.fullName.substring(0, 2).toUpperCase();
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
@@ -35,7 +35,7 @@ const NavBar = ({ username }) => {
         {expanded && (
           <div className="username">
             <span className="account-type">Basic Account</span>
-            <span className="full-name">{username}</span>
+            <span className="full-name">{user}</span>
           </div>
         )}
       </div>

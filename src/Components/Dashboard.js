@@ -33,7 +33,7 @@ const Dashboard = ({ user }) => {
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
-        <NavBar username={user.fullName} />
+        <NavBar user={user} />
         <div className="dashboard">
           <div className="status-cards">
             {statusData.isLearning ? (

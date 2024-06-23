@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './SignUpForm.css';
-const backend = process.env.DB_PASS;
-
+const backend = process.env.REACT_APP_BACKEND_URL;
 
 const SignUpForm = ({ toggleForm, onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -65,9 +64,8 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     e.preventDefault();
     if (isFormValid) {
       try {
-        console.log(`${backend}/user/register`)
         const response = await axios.post(`${backend}/user/register`, {
-          fullname: formData.fullName,
+          fullname: formData.fullName, // Ensure this matches the backend key
           email: formData.email,
           password: formData.password,
           accountType: false // adjust this if needed
@@ -76,11 +74,14 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
             'Content-Type': 'application/json',
           },
         });
+        console.log(JSON.stringify(response, null, 2)); // Print the entire response object as a string
+        console.log(JSON.stringify(response.data, null, 2)); // Print the data from the response as a string
         const userData = {
           id: response.data._id,
-          fullName: response.data.FullName,
-          email: response.data.Email
+          fullName: response.data.FullName, // Ensure this matches the backend response
+          email: response.data.Email,
         };
+        console.log(userData)
         onSubmit(userData);
         setSignUpStatus('Sign-up successful!');
       } catch (error) {

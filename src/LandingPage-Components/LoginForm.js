@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './LoginForm.css';
-const backend = process.env.DB_PASS;
 
+const backend = process.env.REACT_APP_BACKEND_URL;
 
 const LoginForm = ({ toggleForm, onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -58,7 +58,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
         const userData = {
           id: response.data._id,
           fullName: response.data.FullName,
-          email: response.data.Email
+          email: response.data.Email,
         };
         onSubmit(userData);
         setLoginStatus('Login successful!');

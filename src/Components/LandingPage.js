@@ -6,27 +6,27 @@ import ImageSection from '../LandingPage-Components/ImageSection';
 import Footer from '../LandingPage-Components/Footer';
 import bgImg from '../Images/Logo.svg';
 import bgImg2 from '../Images/BG2.svg';
-import Contribute from '../ContributeSection/ContributeSection'
+import Contribute from '../ContributeSection/ContributeSection';
 
-function LandingPage() {
+function LandingPage({ onLogin }) {
   return (
     <div>
-        <Header />
-        <div className="content-container">
-            <div className="background-image">
-            <img src={bgImg} alt="bgImage" className="bg-img" />
-            </div>
-            <MainSection />
-            <Features />
-            <ImageSection />  
-            <Contribute/>
-            <div className="background-image2">
-            <img src={bgImg2} alt="bgImage2" className="bg-img2" />
-            </div>
-        </div> 
-        <Footer />
+      <Header />
+      <div className="content-container">
+        <div className="background-image">
+          <img src={bgImg} alt="bgImage" className="bg-img" />
+        </div>
+        <MainSection onLogin={onLogin} />
+        <Features />
+        <ImageSection />
+        <Contribute />
+        <div className="background-image2">
+          <img src={bgImg2} alt="bgImage2" className="bg-img2" />
+        </div>
       </div>
-  )
+      <Footer />
+    </div>
+  );
 }
 
-export default LandingPage
+export default LandingPage;

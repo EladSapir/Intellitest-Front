@@ -6,7 +6,7 @@ import StatusCard from '../Dashboard-Components/StatusCard';
 import DeleteModule from '../Dashboard-Components/DeleteModule';
 import './Dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = ({ user }) => {
   const [statusData, setStatusData] = useState({
     liveLearningCycle: '',
     lastAccuracyPercentage: '',
@@ -15,11 +15,9 @@ const Dashboard = () => {
     isLearning: false
   });
 
-  const [username, setUsername] = useState('');
-
   useEffect(() => {
     // Fetch status data from the backend server
-    fetch('/api/status-data')
+    fetch(`/api/status-data?userId=${user.id}`)
       .then(response => response.json())
       .then(data => {
         setStatusData({
@@ -30,19 +28,12 @@ const Dashboard = () => {
           isLearning: data.isLearning
         });
       });
-
-    // Fetch username from the backend server
-    fetch('/api/username')
-      .then(response => response.json())
-      .then(data => {
-        setUsername(data.username);
-      });
-  }, []);
+  }, [user.id]);
 
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
-        <NavBar username={username} />
+        <NavBar username={user.fullName} />
         <div className="dashboard">
           <div className="status-cards">
             {statusData.isLearning ? (

@@ -48,16 +48,20 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     e.preventDefault();
     if (isFormValid) {
       try {
-        const response = await axios.post('https://intellitest-backend.onrender.com/user/login', formData, {
+        const response = await axios.post('http://localhost:4000/user/login', formData, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
+        const userData = {
+          id: response.data._id,
+          fullName: response.data.FullName,
+          email: response.data.Email
+        };
+        onSubmit(userData);
         setLoginStatus('Login successful!');
-        // Handle the successful login response here, e.g., save token, redirect, etc.
       } catch (error) {
         setLoginStatus('Login failed: ' + (error.response ? error.response.data.message : error.message));
-        // Handle the error response here
       }
     }
   };

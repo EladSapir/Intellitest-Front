@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import eye from '../Images/eye-icon.png';
 import './SignUpForm.css';
 
@@ -57,10 +58,29 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isFormValid) {
-      onSubmit(formData);
+      try {
+        const response = await axios.post('http://localhost:4000/user/register', {
+          fullname: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          accountType: false // adjust this if needed
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const userData = {
+          id: response.data._id,
+          fullName: response.data.FullName,
+          email: response.data.Email
+        };
+        onSubmit(userData);
+      } catch (error) {
+        // Handle the error response here
+      }
     }
   };
 

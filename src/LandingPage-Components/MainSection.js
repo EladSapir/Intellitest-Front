@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MainSection.css';
 import TitleSection from './TitleSection';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
-const MainSection = () => {
-  const [isSignUp, setIsSignUp] = React.useState(false);
+const MainSection = ({ onLogin }) => {
+  const [isSignUp, setIsSignUp] = useState(false);
 
   const toggleForm = () => {
     setIsSignUp(!isSignUp);
   };
 
-  const handleLoginSubmit = (formData) => {
-    // Implement your login submission logic here
-    console.log('Login form submitted:', formData);
+  const handleLoginSubmit = (userData) => {
+    onLogin(userData);
   };
 
-  const handleSignUpSubmit = (formData) => {
-    // Implement your sign-up submission logic here
-    console.log('Sign-up form submitted:', formData);
+  const handleSignUpSubmit = (userData) => {
+    onLogin(userData);
   };
 
   return (

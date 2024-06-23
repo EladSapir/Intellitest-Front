@@ -15,7 +15,7 @@
 }
 
 .dashboard {
-  width: 100%; /* Take full width of the container */
+  width: 85%; /* Take full width of the container */
   padding: 20px;
   display: flex;
   flex-direction: column;

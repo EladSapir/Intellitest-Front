@@ -1,36 +1,144 @@
 .delete-module {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .delete-module-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .delete-module-content i {
-    font-size: 24px;
-    color: #ff4d4f;
-  }
-  
-  .delete-module-content span {
-    font-size: 18px;
-    font-weight: bold;
-    color: #000;
-  }
-  
-  .delete-button {
-    background-color: #ff4d4f;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden; /* Ensure the component is not cropped */
+}
+
+.delete-module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.delete-module-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.delete-module-content i {
+  font-size: 24px;
+  color: #ff4d4f;
+}
+
+.delete-module-content span {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.delete-button {
+  background-color: #ff4d4f;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.delete-module.expanded {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.delete-module-expanded-content {
+  width: 100%;
+  margin-top: 0px; /* Removed extra margin to remove whitespace */
+}
+
+.delete-module-expanded-content h2 {
+  color: #000;
+  font-size: 22px;
+  margin-bottom: 10px;
+  margin-top: 0px; /* Ensuring no extra margin at the top */
+}
+
+.delete-module-expanded-content p {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.delete-module-input {
+  margin-bottom: 20px;
+  width: 30%; /* Adjusted width to make it shorter */
+}
+
+.delete-module-input label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #007bff;
+  padding: 0;
+}
+
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+}
+
+.delete-module-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 10px;
+}
+
+.cancel-button, .confirm-delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: #000;
+  font-size: 16px;
+  text-decoration: underline;
+  text-decoration-color: #000;
+  text-underline-offset: 3px;
+}
+
+.confirm-delete-button {
+  background-color: #ff4d4f;
+  color: #fff;
+  font-size: 16px;
+}
+
+.confirm-delete-button.disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}

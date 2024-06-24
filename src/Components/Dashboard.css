@@ -10,12 +10,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* Adjust the width as needed */
+  width: 80%; /* Adjust the width as needed */ 
   max-width: 1200px; /* Optional: limit the maximum width */
 }
 
 .dashboard {
-  width: 85%; /* Take full width of the container */
+  width: 80%; /* Take full width of the container */
   padding: 20px;
   display: flex;
   flex-direction: column;

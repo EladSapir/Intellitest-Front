@@ -35,7 +35,7 @@ const NavBar = ({ user }) => {
         {expanded && (
           <div className="username">
             <span className="account-type">Basic Account</span>
-            <span className="full-name">{user}</span>
+            <span className="full-name">{user.fullName}</span>
           </div>
         )}
       </div>

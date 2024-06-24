@@ -43,7 +43,7 @@
 }
 
 .username {
-  margin-top: 10px;
+  margin-top: 3px;
   text-align: center;
 }
 
@@ -231,4 +231,11 @@
   align-items: center;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar.expanded .navbar-logo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:10px;
 }

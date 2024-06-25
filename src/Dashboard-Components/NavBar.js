@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
-//import ProfilePopup from './ProfilePopup';
+import ProfilePopup from './ProfilePopup';
 
 const NavBar = ({ user }) => {
   const initials = user.fullName.split(' ').map(n => n[0]).join('');

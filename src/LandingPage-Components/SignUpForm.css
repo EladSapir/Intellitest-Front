@@ -76,11 +76,15 @@
   .remember-me input {
     margin-right: 10px;
   }
+
+  .remember-me input[type="checkbox"]{
+    margin: 3px 3px 3px 0px;
+  }
   
   .remember-me-warning {
     font-size: 12px;
     color: gray;
-    margin-top: -10px;
+    margin-top: -20px;
   }
   
   .login-button {

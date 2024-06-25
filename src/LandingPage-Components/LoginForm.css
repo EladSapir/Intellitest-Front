@@ -77,7 +77,6 @@
     font-size: 12px;
     color: gray;
     margin-top: -10px;
-    margin-bottom: 20px;
   }
   
   .login-button {
@@ -90,7 +89,6 @@
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 20px;
   }
   
   .login-footer {

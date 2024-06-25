@@ -112,7 +112,6 @@
   display: block;
   width: 100%;
   padding: 10px;
-  margin-bottom: 8px; /* Adjusted gap */
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -207,8 +206,8 @@
   border: 2px solid rgba(250, 204, 21, 1);
   border-radius: 60px;
   position: absolute;
-  top:750px;
-  left:937px;
+  top:675px;
+  left:910px;
 }
 
 .mouse::before {

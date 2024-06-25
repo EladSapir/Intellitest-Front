@@ -1,9 +1,7 @@
 .features-container {
   display: flex;
-  justify-content: space-around;
-  padding: 50px 100px;
-  margin-left: 50px;
-  margin-right: 50px;
+  justify-content: space-between;
+  padding: 50px 120px;
   flex-wrap: wrap;
 }
 
@@ -11,6 +9,7 @@
 .features-title{
   display: flex;
   justify-content: center;
+  margin-top: 200px;
 }
 .features-title h3{
   font-size: 30px;

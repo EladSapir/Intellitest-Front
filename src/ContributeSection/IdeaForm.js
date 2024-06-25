@@ -58,7 +58,7 @@ const IdeaForm = () => {
           onChange={(e) => setEmail(e.target.value)} 
         />
         <p className='inputs-title'>Drop Ideas Here</p>
-        <textarea 
+        <textarea className='idea-textarea'
           placeholder="Drop Ideas Here" 
           value={idea} 
           onChange={(e) => setIdea(e.target.value)}

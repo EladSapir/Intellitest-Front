@@ -2,27 +2,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 50px 20px;
+  padding: 50px 120px;
   background:transparent ;
-  margin-left: 50px;
-  margin-right: 70px;
 }
 
 .image-text-content {
-  max-width: 35%;
-  margin-left: 120px;
+  width: 687px;
 }
 
 .image-h1 {
   font-size: 2rem;
   font-family: 'Inter', sans-serif;
-  margin-bottom: 1rem;
 }
 
 .image-h3 {
   font-size: 30px;
   font-family: 'Inter', sans-serif;
-  margin-bottom: 1rem;
   font-weight: 700;
 }
 .image-h4 {
@@ -33,32 +28,26 @@
 }
 
 .image-p {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  font-size: 16px;
 }
 
 .image-start-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color:rgba(253, 224, 71, 1);
+  display: inline-flex; /* Change to inline-flex for better alignment */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  background-color: rgba(253, 224, 71, 1);
   color: #000;
-  text-decoration: none;
   font-weight: bold;
   border-radius: 5px;
-}
-
-.image-image-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 50px 20px;
-  background:transparent ;
+  width: 360px;
+  height: 52px;
+  text-align: center;
+  text-decoration: none; /* Ensure no underline */
 }
 
 .image-image {
   width: 686px;
   height: auto;
   border-radius: 10px;
-  margin-right: 100px;
 }
 

@@ -51,6 +51,10 @@
   text-align: left;
 }
 
+.idea-textarea {
+  font-family: 'Inter' , sans-serif;
+}
+
 .success-message {
   color: green;
   font-family: 'Inter', sans-serif;

@@ -1,4 +1,4 @@
-.image-container {
+.image-image-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,36 +8,36 @@
   margin-right: 70px;
 }
 
-.text-content {
+.image-text-content {
   max-width: 35%;
   margin-left: 120px;
 }
 
-h1 {
+.image-h1 {
   font-size: 2rem;
   font-family: 'Inter', sans-serif;
   margin-bottom: 1rem;
 }
 
-h3 {
+.image-h3 {
   font-size: 30px;
   font-family: 'Inter', sans-serif;
   margin-bottom: 1rem;
   font-weight: 700;
 }
-h4 {
+.image-h4 {
   font-size: 20px;
   font-family: 'Inter', sans-serif;
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
-p {
+.image-p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.start-button {
+.image-start-button {
   display: inline-block;
   padding: 10px 20px;
   background-color:rgba(253, 224, 71, 1);
@@ -47,7 +47,7 @@ p {
   border-radius: 5px;
 }
 
-.image-container {
+.image-image-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +55,7 @@ p {
   background:transparent ;
 }
 
-.image {
+.image-image {
   width: 686px;
   height: auto;
   border-radius: 10px;

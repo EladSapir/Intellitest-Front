@@ -1,8 +1,6 @@
 .text-section-intitle {
-    margin-left: 120px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
   }
   
   .title-intitle {
@@ -25,5 +23,7 @@
     line-height: 48.41px;
     text-align: left;
     color: black;
+    margin:0;
+    padding:0;
   }
   

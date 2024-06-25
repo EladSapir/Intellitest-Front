@@ -52,7 +52,8 @@
 
 .login-section {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  margin-right: 64px;
   align-items: center;
   width: 100%;
 }

@@ -4,9 +4,10 @@ import MainSection from '../LandingPage-Components/MainSection';
 import Features from '../LandingPage-Components/Features';
 import ImageSection from '../LandingPage-Components/ImageSection';
 import Footer from '../LandingPage-Components/Footer';
-import bgImg from '../Images/Logo.svg';
-import bgImg2 from '../Images/BG2.svg';
+import bgImg from '../Images/Page_bg.png';
+//import bgImg2 from '../Images/BG2.svg';
 import Contribute from '../ContributeSection/ContributeSection';
+import './LandingPage.css'
 
 function LandingPage({ onLogin }) {
     const [user, setUser] = useState(null);
@@ -17,19 +18,13 @@ function LandingPage({ onLogin }) {
     };
   
     return (
-      <div>
+      <div className='lp'>
         <Header user={user} />
         <div className="content-container">
-          <div className="background-image">
-            <img src={bgImg} alt="bgImage" className="bg-img" />
-          </div>
           <MainSection onLogin={handleLogin} />
           <Features />
           <ImageSection />
           <Contribute />
-          <div className="background-image2">
-            <img src={bgImg2} alt="bgImage2" className="bg-img2" />
-          </div>
         </div>
         <Footer />
       </div>

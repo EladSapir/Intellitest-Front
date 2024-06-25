@@ -4,9 +4,9 @@ import './Header.css';
 
 const Header = () => (
   <div className="header-container">
-    <div className="logo-container">
+    <div className="logo-container-dashboard">
       <img className="logo" src={logo} alt="IntelliTest" />
-      <span className="logo-text">IntelliTest</span>
+      <span className="logo-text-dashboard">IntelliTest</span>
     </div>
     <div className="nav-links">
       <a href="#">Contact Us</a>

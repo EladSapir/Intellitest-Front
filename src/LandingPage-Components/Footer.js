@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="logo-container">
         <img src={logo} alt="IntelliTest Logo" className="logo" />
-        <span className="logo-text">IntelliTest</span>
+        <span className="logo-text-dashboard">IntelliTest</span>
       </div>
       <div className="footer-menu">
         <a href="#why">Why</a>

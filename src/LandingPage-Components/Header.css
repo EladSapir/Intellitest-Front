@@ -4,7 +4,7 @@
   padding: 40px 40px;
 }
 
-.logo-container {
+.logo-container-dashboard {
   display: flex;
   align-items: center;
 }
@@ -15,7 +15,7 @@
   margin-right: 10px;
 }
 
-.logo-text {
+.logo-text-dashboard {
   font-size: 30px;
   font-weight: bold;
 }

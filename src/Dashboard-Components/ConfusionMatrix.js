@@ -1,36 +1,118 @@
 import React, { useEffect, useState } from 'react';
-import { Scatter } from 'react-chartjs-2';
-import { Chart, CategoryScale, LinearScale, PointElement, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import { Chart, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import './ConfusionMatrix.css';
 
 // Register the components to be used with Chart.js
-Chart.register(CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+Chart.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const ConfusionMatrix = () => {
   const [data, setData] = useState({
-    datasets: [],
+    labels: ['Positive', 'Negative'], // Labels for the x-axis (Predicted Condition)
+    datasets: [
+      {
+        label: 'True Positive',
+        data: [0, 0], // Initial values
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'False Positive',
+        data: [0, 0],
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'True Negative',
+        data: [0, 0],
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'False Negative',
+        data: [0, 0],
+        backgroundColor: 'rgba(255, 206, 86, 0.2)',
+        borderColor: 'rgba(255, 206, 86, 1)',
+        borderWidth: 1
+      }
+    ],
   });
 
   useEffect(() => {
     fetch('/api/confusion-matrix-data')
       .then(response => response.json())
-      .then(data => {
-        setData({
-          datasets: [{
-            label: 'Confusion Matrix',
-            data: data.values,
-            backgroundColor: 'rgba(255, 206, 86, 0.2)',
-            borderColor: 'rgba(255, 206, 86, 1)',
-            borderWidth: 1
-          }]
-        });
+      .then(fetchedData => {
+        if (fetchedData.values.length) {
+          const [truePositive, falsePositive, trueNegative, falseNegative] = fetchedData.values;
+          setData({
+            labels: ['Positive', 'Negative'], // Predicted Condition
+            datasets: [
+              {
+                label: 'True Positive',
+                data: [truePositive, 0],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+              },
+              {
+                label: 'False Positive',
+                data: [falsePositive, 0],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+              },
+              {
+                label: 'True Negative',
+                data: [0, trueNegative],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+              },
+              {
+                label: 'False Negative',
+                data: [0, falseNegative],
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+              }
+            ]
+          });
+        }
       });
   }, []);
+
+  // Chart options with specified x and y axis labels
+  const options = {
+    scales: {
+      x: {
+        type: 'category',
+        title: {
+          display: true,
+          text: 'Predicted Condition'
+        }
+      },
+      y: {
+        type: 'linear',
+        title: {
+          display: true,
+          text: 'Actual Condition'
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+          max: 1
+        }
+      }
+    }
+  };
 
   return (
     <div className="confusion-matrix">
       <h3>Confusion Matrix</h3>
-      <Scatter data={data} />
+      <Bar data={data} options={options} />
     </div>
   );
 };

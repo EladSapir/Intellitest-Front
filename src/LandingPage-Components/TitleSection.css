@@ -1,11 +1,11 @@
-.text-section {
+.text-section-intitle {
     margin-left: 120px;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
   
-  .title {
+  .title-intitle {
     font-family: 'Inter', sans-serif;
     font-size: 104px;
     font-weight: 800;
@@ -14,11 +14,11 @@
     color: black;
   }
   
-  .title-second-line {
+  .title-second-line-intitle {
     display: block;
   }
   
-  .subtitle {
+  .subtitle-intitle {
     font-family: 'Inter', sans-serif;
     font-size: 40px;
     font-weight: 300;

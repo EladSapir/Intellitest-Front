@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
+import ProfilePopup from './ProfilePopup';
 
 const NavBar = ({ user }) => {
-  const initials = user.fullName.substring(0, 2).toUpperCase();
+  const initials = user.fullName.split(' ').map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+  const [showProfilePopup, setShowProfilePopup] = useState(false);
 
   const handleMouseLeave = () => {
     setExpanded(false);
@@ -21,6 +23,14 @@ const NavBar = ({ user }) => {
 
   const closeLogoutPopup = () => {
     setShowLogoutPopup(false);
+  };
+
+  const openProfilePopup = () => {
+    setShowProfilePopup(true);
+  };
+
+  const closeProfilePopup = () => {
+    setShowProfilePopup(false);
   };
 
   return (
@@ -56,6 +66,10 @@ const NavBar = ({ user }) => {
             <span className="material-symbols-outlined icon">wysiwyg</span>
             {expanded && <span>My Models</span>}
           </li>
+          <li className="menu-item" data-tooltip="Edit Profile" onClick={openProfilePopup}>
+            <span className="material-symbols-outlined icon">Edit</span>
+            {expanded && <span>Edit Profile</span>}
+          </li>
         </ul>
       </div>
       <div className="separator"></div> {/* Separator line below the menu */}
@@ -75,6 +89,7 @@ const NavBar = ({ user }) => {
         {expanded ? '<' : '>'}
       </button>
       <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} />
+      {showProfilePopup && <ProfilePopup user={user} onClose={closeProfilePopup} />}
     </div>
   );
 };

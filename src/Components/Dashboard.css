@@ -10,8 +10,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%; /* Adjust the width as needed */ 
-  max-width: 1200px; /* Optional: limit the maximum width */
+  width: 87%; /* Adjust the width as needed */ 
+  /* max-width: 1200px; Optional: limit the maximum width */
 }
 
 .dashboard {

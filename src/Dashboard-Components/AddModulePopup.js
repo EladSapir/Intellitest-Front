@@ -41,9 +41,12 @@ const AddModulePopup = ({ isOpen, onClose }) => {
         <button className="close-button" onClick={onClose}>×</button>
         <div className="popup-header">
           <h2> Hey username</h2>
-          <p>Choose Name for your module</p>
+          <h3>Welcome to Intellitest!, Let’s build your model!</h3>
+          
         </div>
         <div className="popup-body">
+            <h4>Step {step}</h4>
+            <p>Choose Name for your module</p>
           {step === 1 && (
             <div>
               <input

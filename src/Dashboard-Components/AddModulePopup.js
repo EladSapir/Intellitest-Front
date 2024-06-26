@@ -46,9 +46,10 @@ const AddModulePopup = ({ isOpen, onClose }) => {
         </div>
         <div className="popup-body">
             <h4>Step {step}</h4>
-            <p>Choose Name for your module</p>
+            
           {step === 1 && (
-            <div>
+            <div className="popup-step">
+                <p>Choose Name for your module</p>
               <input
                 type="text"
                 value={moduleName}
@@ -59,6 +60,7 @@ const AddModulePopup = ({ isOpen, onClose }) => {
               {renderProgressBars()}
             </div>
           )}
+          
           {step === 2 && (
             <div>
               <input

@@ -56,7 +56,6 @@
   }
   
   .popup-header  {
-    
     position: absolute;
     left: 36px;
     top: 28px;
@@ -68,14 +67,48 @@
     position: absolute;
     top: 137px;
     left: 36px;
-    gap:16px;
+ 
     text-align: left;
-    width: 584px;
-    height: 300px;
+    width: 583px;
+    height: 169px;
     justify-content: space-between;
 }
 
-  .popup-body input[type="text"],
+.popup-body h4{
+    margin: 0;
+    font-size: 20px;
+}
+
+.popup-step p{
+    position: relative;
+    top:10px;
+    font-size: 16px;
+    margin: 0;
+    line-height: 24px;
+
+}
+
+
+  .popup-body input[type="text"]{
+    position: relative;
+    top:20px;
+    width: 562px;
+    height: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    
+  }
+  .popup-body input[type="text"]::placeholder{
+    color: #ccc;
+    font-size: 16px;
+  }
+
+ 
+
+
   .popup-body input[type="file"] {
     width: calc(100% - 20px);
     padding: 10px;
@@ -84,29 +117,44 @@
     border-radius: 5px;
   }
   
-  .next-step-button,
-  .prev-step-button {
+  .next-step-button{
     background-color: #FDE047;
+    color: black;
+
+    border: 1px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    bottom: -5px;
+    right: 0px;   
+    width: 109px;
+    height: 51px;
+  }
+
+  .prev-step-button {
+    background-color: white;
     color: black;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     font-weight: bold;
-    margin: 5px;
+    position: absolute;
+    bottom: 0px;
+    right: 113px;
+    text-decoration: underline;
   }
   
-  .next-step-button:hover,
-  .prev-step-button:hover {
-    background-color: #fdd835;
+  .next-step-button:hover{
+    background-color: #FDF7E7;
   }
   
   .progress-bars {
     position: absolute;
-    top: 455px;
-    left: 36px;
+    top: 355px;
     width: 584px;
-    left: 36px;
     display: flex;
     justify-content: center;
     gap:5px;

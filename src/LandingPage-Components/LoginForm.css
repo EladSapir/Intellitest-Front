@@ -95,7 +95,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
     width: 100%;
   }
   
@@ -117,21 +116,24 @@
   }
   
   .login-status {
-    margin-top: 20px;
     font-size: 14px;
     color: green;
   }
   
   .login-status, .sign-up-status {
-    margin-top: 20px;
     font-size: 14px;
     color: green;
   }
   
   .login-status.error, .sign-up-status.error {
     color: red;
+    text-align: center;
   }
   
+  .login-status.error p{
+    margin: 0px;
+    padding: 0px;
+  }
   .form-container .h3{
     margin:0;
   }

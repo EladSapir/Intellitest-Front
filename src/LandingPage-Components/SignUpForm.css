@@ -131,4 +131,11 @@
   .login-status.error, .sign-up-status.error {
     color: red;
   }
-  
+  .login-status.error p{
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .radio-group input[type="radio"] {
+    margin: 3px 3px 0px 0px;
+  }

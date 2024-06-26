@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
 import ProfilePopup from './ProfilePopup';
+import AddModulePopup from './AddModulePopup'; // Import the new component
 
 const NavBar = ({ user }) => {
   const initials = user.fullName.split(' ').map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
+  const [showAddModulePopup, setShowAddModulePopup] = useState(false); // State for Add Module Popup
 
   const handleMouseLeave = () => {
     setExpanded(false);
@@ -31,6 +33,14 @@ const NavBar = ({ user }) => {
 
   const closeProfilePopup = () => {
     setShowProfilePopup(false);
+  };
+
+  const openAddModulePopup = () => {
+    setShowAddModulePopup(true);
+  };
+
+  const closeAddModulePopup = () => {
+    setShowAddModulePopup(false);
   };
 
   return (
@@ -58,7 +68,7 @@ const NavBar = ({ user }) => {
             <span className="material-symbols-outlined icon">space_dashboard</span>
             {expanded && <span>Dashboard</span>}
           </li>
-          <li className="menu-item" data-tooltip="New Model">
+          <li className="menu-item" data-tooltip="New Model" onClick={openAddModulePopup}>
             <span className="material-symbols-outlined icon">library_add</span>
             {expanded && <span>New Model</span>}
           </li>
@@ -90,6 +100,7 @@ const NavBar = ({ user }) => {
       </button>
       <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} />
       {showProfilePopup && <ProfilePopup user={user} onClose={closeProfilePopup} />}
+      {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} />}
     </div>
   );
 };

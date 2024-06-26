@@ -1,0 +1,99 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    width: 959px;
+    height: 536px;
+    max-width: 90%;
+    background-image: url('../Images/BG Image.png'); /* Make sure to use the correct path */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #FDE047;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .popup-header h2 {
+    margin-top: 28px;
+    margin-left: 36px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    width: 584px;
+    height: 73px;
+    left: 36px;
+  }
+  
+  .popup-header p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .popup-body input[type="text"],
+  .popup-body input[type="file"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .next-step-button,
+  .prev-step-button {
+    background-color: #FDE047;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+  }
+  
+  .next-step-button:hover,
+  .prev-step-button:hover {
+    background-color: #fdd835;
+  }
+  
+  .progress-bars {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .progress-bar {
+    flex: 1;
+    height: 10px;
+    background: #e0e0e0;
+    margin: 0 2px; /* Reduce the margin to bring bars closer */
+    border-radius: 5px;
+  }
+  
+  .progress-bar.filled {
+    background: #FDE047;
+  }
+  

@@ -63,7 +63,7 @@ const IdeaForm = () => {
           value={idea} 
           onChange={(e) => setIdea(e.target.value)}
         ></textarea>
-        <button type="submit" className="send-button">Send</button>
+        <button type="submit" className="send-button btn-landingpage">Send</button>
       </form>
       {successMessage && <p className="success-message">{successMessage}</p>}
     </div>

@@ -107,7 +107,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
       <p className="remember-me-warning">
         Not your device? Use a private browsing window to sign in and close it when you're done.
       </p>
-      <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} type="submit" disabled={!isFormValid}>Log in</button>
+      <button className={`login-button ${!isFormValid ? 'disabled' : 'btn-landingpage'}`} type="submit" disabled={!isFormValid}>Log in</button>
       {loginStatus && <p className={`login-status ${loginStatus.includes('failed') ? 'error' : ''}`}>{loginStatus}</p>}
       <div className="login-footer">
         <p>

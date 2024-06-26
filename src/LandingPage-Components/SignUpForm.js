@@ -160,7 +160,7 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
           </label>
         </div>
       </div>
-      <button className={`login-button ${!isFormValid ? 'disabled' : ''}`} type="submit" disabled={!isFormValid}>Sign up</button>
+      <button className={`login-button ${!isFormValid ? 'disabled' : 'btn-landingpage'}`} type="submit" disabled={!isFormValid}>Sign up</button>
       {signUpStatus && <p className={`sign-up-status ${signUpStatus.includes('failed') ? 'error' : ''}`}>{signUpStatus}</p>}
       <div className="login-footer">
         <p>

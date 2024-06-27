@@ -1,15 +1,16 @@
+// NavBar.js
 import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
 import ProfilePopup from './ProfilePopup';
-import AddModulePopup from './AddModulePopup'; // Import the new component
+import AddModulePopup from './AddModulePopup';
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, onLogout }) => {
   const initials = user.fullName.split(' ').map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
-  const [showAddModulePopup, setShowAddModulePopup] = useState(false); // State for Add Module Popup
+  const [showAddModulePopup, setShowAddModulePopup] = useState(false);
 
   const handleMouseLeave = () => {
     setExpanded(false);
@@ -98,7 +99,7 @@ const NavBar = ({ user }) => {
       <button className="toggle-button" onClick={toggleExpanded}>
         {expanded ? '<' : '>'}
       </button>
-      <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} />
+      <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} onLogout={onLogout} />
       {showProfilePopup && <ProfilePopup user={user} onClose={closeProfilePopup} />}
       {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} user={user} />}
     </div>

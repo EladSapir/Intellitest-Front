@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import './App.css';
 import GlobalStyle from './GlobalStyle';
@@ -13,11 +14,16 @@ function App() {
     setUser(userData);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null);
+  };
+
   return (
     <div className="App">
       <GlobalStyle />
       {isLoggedIn ? (
-        <Dashboard user={user} />
+        <Dashboard user={user} onLogout={handleLogout} />
       ) : (
         <LandingPage onLogin={handleLogin} />
       )}

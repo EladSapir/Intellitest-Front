@@ -1,3 +1,4 @@
+// Dashboard.js
 import React, { useEffect, useState } from 'react';
 import NavBar from '../Dashboard-Components/NavBar';
 import HistoryGraph from '../Dashboard-Components/HistoryGraph';
@@ -6,7 +7,7 @@ import StatusCard from '../Dashboard-Components/StatusCard';
 import DeleteModule from '../Dashboard-Components/DeleteModule';
 import './Dashboard.css';
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, onLogout }) => {
   const [statusData, setStatusData] = useState({
     liveLearningCycle: '',
     lastAccuracyPercentage: '',
@@ -33,7 +34,7 @@ const Dashboard = ({ user }) => {
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
-        <NavBar user={user} />
+        <NavBar user={user} onLogout={onLogout} />
         <div className="dashboard">
           <div className="status-cards">
             {statusData.isLearning ? (

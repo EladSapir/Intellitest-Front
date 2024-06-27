@@ -137,3 +137,15 @@
   .form-container .h3{
     margin:0;
   }
+
+  .reset-password-status {
+    font-size: 14px;
+    color: green;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .reset-password-status.error {
+    color: red;
+    margin:0;
+  }  

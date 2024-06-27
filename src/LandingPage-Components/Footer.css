@@ -1,7 +1,7 @@
 .footer {
   display: flex;
   align-items: center;
-  padding: 20px 40px;
+  gap:100px;
 }
 
 .logo-container {
@@ -23,9 +23,9 @@
 
 .footer-menu {
   display: flex;
-  margin-left: 150px;
   gap: 20px;
   font-size: 18px; /* Adjust font size as needed */
+  margin-left: auto;
 }
 
 .footer-menu a {
@@ -40,7 +40,7 @@
 .footer-social {
   display: flex;
   gap: 15px;
-  margin-left: auto; /* Pushes the social icons to the right */
+  margin-right: 70px;
 }
 
 .footer-social a {

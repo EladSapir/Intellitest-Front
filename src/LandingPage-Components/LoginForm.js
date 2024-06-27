@@ -14,6 +14,8 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     password: '',
   });
   const [loginStatus, setLoginStatus] = useState('');
+  const [resetPasswordStatus, setResetPasswordStatus] = useState('');
+  const [resetPasswordStatusClass, setResetPasswordStatusClass] = useState('');
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -68,6 +70,36 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     }
   };
 
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setResetPasswordStatus('Please enter a valid email address');
+      setResetPasswordStatusClass('error');
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${backend}/user/recover-password`, { email: formData.email }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        setResetPasswordStatus('Password reset email sent successfully!');
+        setResetPasswordStatusClass('');
+      } else if (response.status === 404) {
+        setResetPasswordStatus('User does not exist');
+        setResetPasswordStatusClass('error');
+      } else {
+        setResetPasswordStatus('Error sending password reset email');
+        setResetPasswordStatusClass('error');
+      }
+    } catch (error) {
+      setResetPasswordStatus('Error sending password reset email: ' + (error.response ? error.response.data.error : error.message));
+      setResetPasswordStatusClass('error');
+    }
+  };
+
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <h3 className="login-title">Log in</h3>
@@ -111,12 +143,13 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
       {loginStatus && <p className={`login-status ${loginStatus.includes('failed') ? 'error' : ''}`}>{loginStatus}</p>}
       <div className="login-footer">
         <p>
-          Forgot your password? <a href="#" className="reset-password">Reset Your Password</a>
+          Forgot your password? <a href="#" className="reset-password" onClick={handleResetPassword}>Reset Your Password</a>
         </p>
         <p>
           Don’t have an account? <a href="#" className="register" onClick={toggleForm}>Register</a>
         </p>
       </div>
+      {resetPasswordStatus && <p className={`reset-password-status ${resetPasswordStatusClass}`}>{resetPasswordStatus}</p>}
     </form>
   );
 };

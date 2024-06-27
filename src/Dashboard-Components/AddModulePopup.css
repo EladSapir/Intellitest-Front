@@ -1,4 +1,13 @@
-.popup-overlay {
+.title-steps {
+    position: relative;
+    top: 10px;
+    font-size: 16px;
+    margin: 0;
+    line-height: 24px;
+    margin-bottom: 10px; 
+  }
+  
+  .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -30,7 +39,6 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    
     border: none;
     font-size: 20px;
     cursor: pointer;
@@ -39,59 +47,54 @@
   }
   
   .popup-header h2 {
-    
     font-size: 30px;
     text-align: left;
     left: 36px;
-    margin:0;
+    margin: 0;
     line-height: 36.3px;
   }
+  
   .popup-header h3 {
     font-size: 24px;
     text-align: left;
     font-weight: normal;
     margin: 0;
     line-height: 29px;
-    
   }
   
-  .popup-header  {
+  .popup-header {
     position: absolute;
     left: 36px;
     top: 28px;
     gap: 10px;
-    
   }
   
-.popup-body{
+  .popup-body {
     position: absolute;
     top: 137px;
     left: 36px;
- 
     text-align: left;
     width: 583px;
-    height: 169px;
+    height: 197px;
     justify-content: space-between;
-}
-
-.popup-body h4{
+  }
+  
+  .popup-body h4 {
     margin: 0;
     font-size: 20px;
-}
-
-.popup-step p{
+  }
+  
+  /* .title-steps p {
     position: relative;
-    top:10px;
+    top: 10px;
     font-size: 16px;
     margin: 0;
     line-height: 24px;
+    margin-bottom: 20px; /* Add margin to create the gap } */
 
-}
-
-
-  .popup-body input[type="text"]{
+  .popup-body input[type="text"] {
     position: relative;
-    top:20px;
+    top: 20px;
     width: 562px;
     height: 20px;
     padding: 10px;
@@ -99,56 +102,80 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    
+    cursor: pointer;
   }
-  .popup-body input[type="text"]::placeholder{
+  
+  .popup-body input[type="text"]::placeholder {
     color: #ccc;
     font-size: 16px;
   }
-
- 
-
-
+  
   .popup-body input[type="file"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    display: none; /* Hide the actual file input */
   }
   
-  .next-step-button{
-    background-color: #FDE047;
+  .file-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 562px;
+    height: 20px;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #555;
+  }
+  
+  .file-upload-button .material-icons {
+    margin-right: 8px;
+  }
+  
+  .next-step-button {
+    background-color: #fde047;
     color: black;
-
-    border: 1px;
+    border-width: 1px;  
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    bottom: -5px;
-    right: 0px;   
+    bottom: -80px;
+    right: 0px;
     width: 109px;
     height: 51px;
-  }
-
+    border-color: #FACC15;
+    border-color: #030712;
+    border-width: 1px;  
+    box-shadow: 3px 3px 0px 0px #1f2937;
+}
+  
   .prev-step-button {
     background-color: white;
     color: black;
-    padding: 10px 20px;
     border: none;
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
     position: absolute;
-    bottom: 0px;
+    bottom: -80px;
+    width: 97px;
+    height:51px;
     right: 113px;
     text-decoration: underline;
   }
   
-  .next-step-button:hover{
-    background-color: #FDF7E7;
+  .next-step-button:hover {
+    background-color: #fde047;
+    border-color: #FACC15;
+    border-width: 1px;  
+    border-radius: 8px;
+    box-shadow: 0px 0px 0px 0px #1f2937;
+    transition: 0.3s;
+    border-color: #030712;
   }
   
   .progress-bars {
@@ -157,8 +184,7 @@
     width: 584px;
     display: flex;
     justify-content: center;
-    gap:5px;
-    
+    gap: 5px;
   }
   
   .progress-bar {
@@ -171,6 +197,176 @@
   }
   
   .progress-bar.filled {
-    background: #FACC15;
+    background: #facc15;
   }
   
+  .Warning {
+    font-size: 16px;
+    font-weight: 400;
+    color:#6b7280;
+    margin:0;
+    position:relative;
+  }
+  
+  .toolkit-checkboxes{
+    width: 583px;
+    height: 80px;
+    top: 20px;
+    left: -4px;
+    position: relative;
+    margin: 0;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+  }
+
+  .toolkit-checkboxes label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 16px;
+  }
+
+  .toolkit-checkboxes input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  .toolkit-checkboxes input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border: 1px solid #ccc;
+
+  }
+  
+  .toolkit-checkboxes input[type="checkbox"]:checked::after {
+    content: "✔";
+    font-size: 18px;
+    color: #FACC15;
+    position: absolute;
+    top:3px;
+    left: 6px;
+  }
+
+  .toolkit-checkboxes .material-icons {
+    font-size: 18px;
+    color: #6c757d;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  .interval-radiobutton {
+    position: absolute;
+    left:-3px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+  }
+  
+  .interval-radiobutton label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 16px;
+  }
+  
+  .interval-radiobutton input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #FDE047;
+    border-color: #FDE047;
+  }
+  
+  .file-name {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .error-message-step {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    padding-left: 1px;
+  }
+  
+  .progress-percentage {
+    position: absolute;
+    top: 315px;
+    right: 0px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  
+  .tooltip-container-step {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .tooltip-icon-step {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    color: #6c757d; /* Adjust color if necessary */
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+
+  
+  .tooltip-text-step {
+    visibility: hidden;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%; /* Position the tooltip above the icon */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip-container-step:hover .tooltip-text-step {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .step-5-button.next-step-button {
+    width: 200px; /* Increased width to fit the text in one line */
+}
+
+.step-5-button.prev-step-button {
+    width: 150px; /* Adjusted width */
+    right: 210px; /* Adjusted position to match the new width */
+}

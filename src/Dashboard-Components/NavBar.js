@@ -100,7 +100,7 @@ const NavBar = ({ user }) => {
       </button>
       <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} />
       {showProfilePopup && <ProfilePopup user={user} onClose={closeProfilePopup} />}
-      {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} />}
+      {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} user={user} />}
     </div>
   );
 };

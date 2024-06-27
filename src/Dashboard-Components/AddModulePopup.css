@@ -84,14 +84,6 @@
     font-size: 20px;
   }
   
-  /* .title-steps p {
-    position: relative;
-    top: 10px;
-    font-size: 16px;
-    margin: 0;
-    line-height: 24px;
-    margin-bottom: 20px; /* Add margin to create the gap } */
-
   .popup-body input[type="text"] {
     position: relative;
     top: 20px;
@@ -227,11 +219,16 @@
     font-size: 16px;
   }
 
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
   .toolkit-checkboxes input[type="checkbox"] {
     width: 18px;
     height: 18px;
     margin-right: 8px;
-
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -244,7 +241,6 @@
     height: 18px;
     background: #fff;
     border: 1px solid #ccc;
-
   }
   
   .toolkit-checkboxes input[type="checkbox"]:checked::after {
@@ -266,10 +262,10 @@
   .interval-radiobutton {
     position: absolute;
     left:-3px;
+    top: 70px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-
   }
   
   .interval-radiobutton label {
@@ -306,11 +302,10 @@
     font-weight: 400;
   }
   
-  
  
 .tooltip-wrapper {
   position: relative;
-  display: inline-block;
+  display:flex;
 }
 
 .tooltip-container-step {
@@ -363,11 +358,12 @@
   visibility: visible;
   opacity: 1;
 }
-  .step-5-button.next-step-button {
-    width: 200px; /* Increased width to fit the text in one line */
+
+.step-5-button.next-step-button {
+  width: 200px; /* Increased width to fit the text in one line */
 }
 
 .step-5-button.prev-step-button {
-    width: 150px; /* Adjusted width */
-    right: 210px; /* Adjusted position to match the new width */
+  width: 150px; /* Adjusted width */
+  right: 210px; /* Adjusted position to match the new width */
 }

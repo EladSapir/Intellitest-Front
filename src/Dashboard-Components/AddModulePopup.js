@@ -43,6 +43,11 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
     );
   };
 
+  const handleDivClick = (e, value) => {
+    e.stopPropagation();
+    handleToolkitChange({ target: { value } });
+  };
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type !== 'text/csv') {
@@ -134,22 +139,23 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
             <div className="popup-step">
               <p className='title-steps'>Choose your toolkit</p>
               <div className="toolkit-checkboxes">
-              {Object.keys(toolkitDescriptions).map((item) => (
-                <label key={item} className="tooltip-container-step">
-                  <input
-                    type="checkbox"
-                    value={item}
-                    checked={toolkit.includes(item)}
-                    onChange={handleToolkitChange}
-                  />
-                  {item}
-                  <span className="tooltip-wrapper">
-                    <i className="material-icons tooltip-icon-step">help</i>
-                    <span className="tooltip-text-step">{toolkitDescriptions[item]}</span>
-                  </span>
-                </label>
-              ))}
-
+                {Object.keys(toolkitDescriptions).map((item) => (
+                  <label key={item} className="tooltip-container-step">
+                    <div className="checkbox-wrapper" onClick={(e) => handleDivClick(e, item)}>
+                      <input
+                        type="checkbox"
+                        value={item}
+                        checked={toolkit.includes(item)}
+                        onChange={handleToolkitChange}
+                      />
+                      {item}
+                    </div>
+                    <span className="tooltip-wrapper">
+                      <i className="material-icons tooltip-icon-step">help</i>
+                      <span className="tooltip-text-step">{toolkitDescriptions[item]}</span>
+                    </span>
+                  </label>
+                ))}
               </div>
               <button className="prev-step-button" onClick={prevStep}>Go Back</button>
               <button className="next-step-button" onClick={nextStep}>Next Step</button>
@@ -165,22 +171,22 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
                 <label>
                   <input
                     type="radio"
-                    value="Once a week(Coming Soon)"
-                    checked={interval === 'Once a week(Coming Soon)'}
+                    value="Once a week"
+                    checked={interval === 'Once a week'}
                     onChange={(e) => setInterval(e.target.value)}
                     disabled
                   />
-                  Once a week
+                  Once a week - Coming Soon
                 </label>
                 <label>
                   <input
                     type="radio"
-                    value="Once a month(Coming Soon)"
-                    checked={interval === 'Once a month(Coming Soon)'}
+                    value="Once a month"
+                    checked={interval === 'Once a month'}
                     onChange={(e) => setInterval(e.target.value)}
                     disabled
                   />
-                  Once a month
+                  Once a month - Coming Soon
                 </label>
                 <label>
                   <input
@@ -199,18 +205,18 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
             </div>
           )}
 
-            {step === 5 && (
+          {step === 5 && (
             <div>
-                <p className='title-steps'>Name: {moduleName}</p>
-                <p className='title-steps'>CSV File: {csvFile ? csvFile.name : ''}</p>
-                <p className='title-steps'>Tool Kit: {toolkit.join(', ')}</p>
-                <p className='title-steps'>Running Intervals: {interval}</p>
-                <button className="prev-step-button step-5-button" onClick={prevStep}>Go Back</button>
-                <button className="next-step-button step-5-button" onClick={handleSubmit}>Approve and Go To Dashboard</button>
-                {renderProgressBars()}
-                <p className="progress-percentage">{calculatePercentage()}%</p>
+              <p className='title-steps'>Name: {moduleName}</p>
+              <p className='title-steps'>CSV File: {csvFile ? csvFile.name : ''}</p>
+              <p className='title-steps'>Tool Kit: {toolkit.join(', ')}</p>
+              <p className='title-steps'>Running Intervals: {interval}</p>
+              <button className="prev-step-button step-5-button" onClick={prevStep}>Go Back</button>
+              <button className="next-step-button step-5-button" onClick={handleSubmit}>Approve and Go To Dashboard</button>
+              {renderProgressBars()}
+              <p className="progress-percentage">{calculatePercentage()}%</p>
             </div>
-            )}
+          )}
         </div>
       </div>
     </div>

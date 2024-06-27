@@ -134,19 +134,22 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
             <div className="popup-step">
               <p className='title-steps'>Choose your toolkit</p>
               <div className="toolkit-checkboxes">
-                {Object.keys(toolkitDescriptions).map((item) => (
-                  <label key={item} className="tooltip-container-step">
-                    <input
-                      type="checkbox"
-                      value={item}
-                      checked={toolkit.includes(item)}
-                      onChange={handleToolkitChange}
-                    />
-                    {item}
+              {Object.keys(toolkitDescriptions).map((item) => (
+                <label key={item} className="tooltip-container-step">
+                  <input
+                    type="checkbox"
+                    value={item}
+                    checked={toolkit.includes(item)}
+                    onChange={handleToolkitChange}
+                  />
+                  {item}
+                  <span className="tooltip-wrapper">
                     <i className="material-icons tooltip-icon-step">help</i>
                     <span className="tooltip-text-step">{toolkitDescriptions[item]}</span>
-                  </label>
-                ))}
+                  </span>
+                </label>
+              ))}
+
               </div>
               <button className="prev-step-button" onClick={prevStep}>Go Back</button>
               <button className="next-step-button" onClick={nextStep}>Next Step</button>

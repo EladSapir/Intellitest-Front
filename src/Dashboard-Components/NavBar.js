@@ -1,4 +1,3 @@
-// NavBar.js
 import React, { useState } from 'react';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
@@ -6,7 +5,8 @@ import ProfilePopup from './ProfilePopup';
 import AddModulePopup from './AddModulePopup';
 
 const NavBar = ({ user, onLogout }) => {
-  const initials = user.fullName.split(' ').map(n => n[0]).join('');
+  const [currentUser, setCurrentUser] = useState(user);
+  const initials = currentUser.fullName.split(' ').map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
@@ -44,6 +44,10 @@ const NavBar = ({ user, onLogout }) => {
     setShowAddModulePopup(false);
   };
 
+  const updateUser = (updatedUser) => {
+    setCurrentUser(updatedUser);
+  };
+
   return (
     <div
       className={`navbar ${expanded ? 'expanded' : ''}`}
@@ -55,9 +59,9 @@ const NavBar = ({ user, onLogout }) => {
         </div>
         {expanded && (
           <div className="username">
-            <span className="account-type">Basic Account</span>
+            <span className="account-type">{currentUser.typeOfUse} Account</span>
             <br />
-            <span className="full-name">{user.fullName}</span>
+            <span className="full-name">{currentUser.fullName}</span>
           </div>
         )}
       </div>
@@ -100,8 +104,8 @@ const NavBar = ({ user, onLogout }) => {
         {expanded ? '<' : '>'}
       </button>
       <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} onLogout={onLogout} />
-      {showProfilePopup && <ProfilePopup user={user} onClose={closeProfilePopup} />}
-      {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} user={user} />}
+      {showProfilePopup && <ProfilePopup user={currentUser} onClose={closeProfilePopup} updateUser={updateUser} onLogout={onLogout} />}
+      {showAddModulePopup && <AddModulePopup isOpen={showAddModulePopup} onClose={closeAddModulePopup} user={currentUser} />}
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ProfilePopup.css';
+import eyeIcon from '../Images/eye-icon.png';  // Assuming the icon is in the same directory
 
-const ProfilePopup = ({ user, onClose }) => {
+const backend = process.env.REACT_APP_BACKEND_URL;
+
+const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
   const [userData, setUserData] = useState({
     name: user.fullName,
     email: user.email,
@@ -13,6 +16,9 @@ const ProfilePopup = ({ user, onClose }) => {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,29 +39,62 @@ const ProfilePopup = ({ user, onClose }) => {
     setSuccess('');
 
     try {
-      const response = await axios.post('/api/user/update', {
-        fullname: userData.name,
+      const payload = {
+        newfullname: userData.name,
         email: user.email, // old email
-        newEmail: userData.newEmail,
-        password: userData.password
-      });
-      setSuccess('User data updated successfully');
-      onClose();
+        newpassword: userData.password,
+        newaccountType: userData.typeOfUse === 'Business'
+      };
+
+      if (userData.newEmail !== user.email) {
+        payload.newEmail = userData.newEmail;
+      }
+
+      const response = await axios.post(`${backend}/user/edit`, payload);
+
+      if (response.status === 200) {
+        setSuccess('User data updated successfully');
+        updateUser({
+          fullName: userData.name,
+          email: userData.newEmail,
+          typeOfUse: userData.typeOfUse
+        });
+        onClose();
+      }
     } catch (error) {
-      setError('There was an error updating the user data');
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError('There was an error updating the user data');
+      }
       console.error("There was an error updating the user data!", error);
     }
   };
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/user/${user.id}`);
-      console.log("User account deleted successfully");
-      onClose();
+      const response = await axios.post(`${backend}/user/delete`, { email: user.email });
+
+      if (response.status === 200) {
+        console.log("User account deleted successfully");
+        onLogout();
+      }
     } catch (error) {
-      setError('There was an error deleting the user account');
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError('There was an error deleting the user account');
+      }
       console.error("There was an error deleting the user account!", error);
     }
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowRepeatPassword = () => {
+    setShowRepeatPassword(!showRepeatPassword);
   };
 
   return (
@@ -66,8 +105,19 @@ const ProfilePopup = ({ user, onClose }) => {
         <div className="profile-header">
           <div className="profile-avatar">{userData.name.split(' ').map(n => n[0]).join('')}</div>
           <div className="profile-name">
-            <span>{userData.name}</span>
-            <button className="edit-button">
+            {isEditingName ? (
+              <input
+                type="text"
+                value={userData.name}
+                name="name"
+                onChange={handleChange}
+                onBlur={() => setIsEditingName(false)}
+                autoFocus
+              />
+            ) : (
+              <span>{userData.name}</span>
+            )}
+            <button className="edit-button" onClick={() => setIsEditingName(true)}>
               <span className="material-icons">edit</span>
             </button>
           </div>
@@ -84,23 +134,33 @@ const ProfilePopup = ({ user, onClose }) => {
         </div>
         <div className="profile-field">
           <label>Password</label>
-          <input 
-            type="password" 
-            value={userData.password} 
-            name="password" 
-            onChange={handleChange}
-            placeholder="Password"
-          />
+          <div className="password-input-container">
+            <input 
+              type={showPassword ? "text" : "password"}
+              value={userData.password}
+              name="password"
+              onChange={handleChange}
+              placeholder="Password"
+            />
+            <button type="button" className="toggle-password" onClick={toggleShowPassword}>
+              <img src={eyeIcon} alt="Toggle visibility" />
+            </button>
+          </div>
         </div>
         <div className="profile-field">
           <label>Repeat Password</label>
-          <input 
-            type="password" 
-            value={userData.repeatPassword} 
-            name="repeatPassword" 
-            onChange={handleChange}
-            placeholder="Repeat Password"
-          />
+          <div className="password-input-container">
+            <input 
+              type={showRepeatPassword ? "text" : "password"}
+              value={userData.repeatPassword}
+              name="repeatPassword"
+              onChange={handleChange}
+              placeholder="Repeat Password"
+            />
+            <button type="button" className="toggle-password" onClick={toggleShowRepeatPassword}>
+              <img src={eyeIcon} alt="Toggle visibility" />
+            </button>
+          </div>
         </div>
         <div className="profile-field">
           <label>Type of use</label>
@@ -112,7 +172,7 @@ const ProfilePopup = ({ user, onClose }) => {
               checked={userData.typeOfUse === 'Private'}
               onChange={handleChange}
             /> Private
-            <input  className="radio-button"
+            <input className="radio-button"
               type="radio" 
               name="typeOfUse" 
               value="Business" 

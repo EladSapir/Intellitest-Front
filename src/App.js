@@ -4,6 +4,7 @@ import './App.css';
 import GlobalStyle from './GlobalStyle';
 import LandingPage from './Components/LandingPage';
 import Dashboard from './Components/Dashboard';
+import NavBar from './Dashboard-Components/NavBar';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,7 +24,7 @@ function App() {
     <div className="App">
       <GlobalStyle />
       {isLoggedIn ? (
-        <Dashboard user={user} onLogout={handleLogout} />
+        <NavBar user={user} onLogout={handleLogout} />
       ) : (
         <LandingPage onLogin={handleLogin} />
       )}

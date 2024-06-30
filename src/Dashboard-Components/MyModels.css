@@ -21,7 +21,7 @@ body {
     margin-bottom: 20px;
   }
 
-.models-list {
+    .models-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Create a grid with 2 columns */
   gap: 30px;
@@ -30,7 +30,7 @@ body {
   max-width: 1396px; /* Optional: maximum width to maintain layout */
   max-height: 871px;
   overflow-y: auto; /* Enable vertical scrolling if needed */
-}
+  }
 
   
   .model-card {

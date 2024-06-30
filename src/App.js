@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import GlobalStyle from './GlobalStyle';
 import LandingPage from './Components/LandingPage';
-import Dashboard from './Components/Dashboard';
+
 import NavBar from './Dashboard-Components/NavBar';
 
 function App() {

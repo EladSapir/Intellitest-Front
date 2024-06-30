@@ -4,9 +4,9 @@ import MainSection from '../LandingPage-Components/MainSection';
 import Features from '../LandingPage-Components/Features';
 import ImageSection from '../LandingPage-Components/ImageSection';
 import Footer from '../LandingPage-Components/Footer';
-import bgImg from '../Images/Page_bg.png';
 import Contribute from '../ContributeSection/ContributeSection';
 import './LandingPage.css'
+
 
 function LandingPage({ onLogin }) {
     const [user, setUser] = useState(null);

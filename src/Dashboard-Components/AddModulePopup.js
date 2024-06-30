@@ -62,7 +62,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
   };
 
   const handleSubmit = () => {
-    // Submit logic here
+  
     onClose();
   };
 

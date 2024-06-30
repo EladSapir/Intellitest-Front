@@ -1,4 +1,4 @@
-// Dashboard.js
+
 import React, { useEffect, useState } from 'react';
 import NavBar from '../Dashboard-Components/NavBar';
 import HistoryGraph from '../Dashboard-Components/HistoryGraph';
@@ -17,7 +17,7 @@ const Dashboard = ({ user, onLogout }) => {
   });
 
   useEffect(() => {
-    // Fetch status data from the backend server
+    
     fetch(`/api/status-data?userId=${user.id}`)
       .then(response => response.json())
       .then(data => {

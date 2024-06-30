@@ -1,4 +1,4 @@
-// ContributeSection.js
+
 import React from 'react';
 import './ContributeSection.css';
 import IdeaForm from './IdeaForm';

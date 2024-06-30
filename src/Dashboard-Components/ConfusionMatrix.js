@@ -3,16 +3,15 @@ import { Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import './ConfusionMatrix.css';
 
-// Register the components to be used with Chart.js
 Chart.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const ConfusionMatrix = () => {
   const [data, setData] = useState({
-    labels: ['Positive', 'Negative'], // Labels for the x-axis (Predicted Condition)
+    labels: ['Positive', 'Negative'], 
     datasets: [
       {
         label: 'True Positive',
-        data: [0, 0], // Initial values
+        data: [0, 0], 
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
@@ -48,7 +47,7 @@ const ConfusionMatrix = () => {
         if (fetchedData.values.length) {
           const [truePositive, falsePositive, trueNegative, falseNegative] = fetchedData.values;
           setData({
-            labels: ['Positive', 'Negative'], // Predicted Condition
+            labels: ['Positive', 'Negative'], 
             datasets: [
               {
                 label: 'True Positive',
@@ -84,7 +83,7 @@ const ConfusionMatrix = () => {
       });
   }, []);
 
-  // Chart options with specified x and y axis labels
+
   const options = {
     scales: {
       x: {

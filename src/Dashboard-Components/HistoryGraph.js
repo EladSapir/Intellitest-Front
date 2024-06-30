@@ -3,11 +3,11 @@ import { Line } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import './HistoryGraph.css';
 
-// Register the components to be used with Chart.js
+
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const HistoryGraph = () => {
-  // Get the current month and set up the last 6 months labels
+ 
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const currentMonth = new Date().getMonth();
   const lastSixMonths = Array.from({ length: 6 }, (_, i) => monthNames[(currentMonth - i + 12) % 12]).reverse();
@@ -42,7 +42,7 @@ const HistoryGraph = () => {
       });
   }, []);
 
-  // Chart options with y-axis scale from 0% to 100% with 10% intervals
+  
   const options = {
     scales: {
       y: {
@@ -51,7 +51,7 @@ const HistoryGraph = () => {
         ticks: {
           stepSize: 10,
           callback: function(value) {
-            return value + '%'; // Add percentage sign to y-axis labels
+            return value + '%'; 
           }
         }
       }

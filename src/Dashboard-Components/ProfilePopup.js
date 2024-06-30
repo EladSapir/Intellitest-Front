@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ProfilePopup.css';
-import eyeIcon from '../Images/eye-icon.png';  // Assuming the icon is in the same directory
+import eyeIcon from '../Images/eye-icon.png';  
 
 const backend = process.env.REACT_APP_BACKEND_URL;
 
@@ -34,14 +34,14 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
       return;
     }
 
-    // Reset messages
+    
     setError('');
     setSuccess('');
 
     try {
       const payload = {
         newfullname: userData.name,
-        email: user.email, // old email
+        email: user.email, 
         newpassword: userData.password,
         newaccountType: userData.typeOfUse === 'Business'
       };

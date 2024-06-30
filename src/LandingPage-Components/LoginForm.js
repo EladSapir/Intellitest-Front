@@ -26,7 +26,7 @@ const LoginForm = ({ toggleForm, onSubmit }) => {
     let newErrors = { ...errors };
     let newFormData = { ...formData, [id]: value };
 
-    // Validation logic
+    
     switch (id) {
       case 'email':
         newErrors.email = !/\S+@\S+\.\S+/.test(value) ? 'Please enter a valid email address (example@ex.com)' : '';

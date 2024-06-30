@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './DeleteModule.css';
-import eyeIcon from '../Images/eye-icon.png'; // Import the eye icon
+import eyeIcon from '../Images/eye-icon.png'; 
 
 const DeleteModule = () => {
   const [expanded, setExpanded] = useState(false);
@@ -8,7 +8,7 @@ const DeleteModule = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleDelete = () => {
-    // Handle delete functionality
+    
     alert('Module deleted');
   };
 

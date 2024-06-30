@@ -3,7 +3,7 @@ import React from 'react';
 import './MyModels.css';
 
 const MyModels = ({ expanded }) => {
-  // Sample data for demonstration purposes
+  
   const models = Array(20).fill({
     name: 'Module Name',
     accuracy: '76.7%',

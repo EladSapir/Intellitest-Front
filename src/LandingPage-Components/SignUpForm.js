@@ -25,7 +25,7 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     let newErrors = { ...errors };
     let newFormData = { ...formData, [id]: value };
 
-    // Validation logic
+   
     switch (id) {
       case 'fullName':
         newErrors.fullName = value.trim() === '' ? 'Full Name is required' : '';
@@ -65,20 +65,20 @@ const SignUpForm = ({ toggleForm, onSubmit }) => {
     if (isFormValid) {
       try {
         const response = await axios.post(`${backend}/user/register`, {
-          fullname: formData.fullName, // Ensure this matches the backend key
+          fullname: formData.fullName, 
           email: formData.email,
           password: formData.password,
-          accountType: false // adjust this if needed
+          accountType: false 
         }, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        console.log(JSON.stringify(response, null, 2)); // Print the entire response object as a string
-        console.log(JSON.stringify(response.data, null, 2)); // Print the data from the response as a string
+        console.log(JSON.stringify(response, null, 2)); 
+        console.log(JSON.stringify(response.data, null, 2)); 
         const userData = {
           id: response.data._id,
-          fullName: response.data.FullName, // Ensure this matches the backend response
+          fullName: response.data.FullName, 
           email: response.data.Email,
         };
         console.log(userData)

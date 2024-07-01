@@ -72,24 +72,20 @@ const NavBar = ({ user, onLogout }) => {
             <div className="menu-title">Menu</div>
             <ul>
               <li className="menu-item" data-tooltip="Dashboard">
-                <Link to="/">
                   <span className="material-symbols-outlined icon">space_dashboard</span>
-                  {expanded && <span>Dashboard</span>}
-                </Link>
+                  {expanded && <span className='navbar-choice'>Dashboard</span>}
               </li>
               <li className="menu-item" data-tooltip="New Model" onClick={openAddModulePopup}>
                 <span className="material-symbols-outlined icon">library_add</span>
-                {expanded && <span>New Model</span>}
+                {expanded && <span className='navbar-choice'>New Model</span>}
               </li>
               <li className="menu-item" data-tooltip="My Models">
-                <Link to="/mymodels">
                   <span className="material-symbols-outlined icon">wysiwyg</span>
-                  {expanded && <span>My Models</span>}
-                </Link>
+                  {expanded && <span className='navbar-choice'>My Models</span>}
               </li>
               <li className="menu-item" data-tooltip="Edit Profile" onClick={openProfilePopup}>
                 <span className="material-symbols-outlined icon">Edit</span>
-                {expanded && <span>Edit Profile</span>}
+                {expanded && <span className='navbar-choice'>Edit Profile</span>}
               </li>
             </ul>
           </div>

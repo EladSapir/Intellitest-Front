@@ -258,3 +258,9 @@
 .add-module-popup-overlay {
   z-index: 2000; /* Ensure popups are above the navbar */
 }
+.navbar-choice{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}

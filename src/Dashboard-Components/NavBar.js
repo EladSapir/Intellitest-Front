@@ -75,12 +75,12 @@ const NavBar = ({ user, onLogout }) => {
                 <span className="material-symbols-outlined icon">library_add</span>
                 {expanded && <span className='navbar-choice'>New Model</span>}
               </li>
-              <li className="menu-item" data-tooltip="My Models">
-                <Link to="/mymodels">
+              <Link to="/mymodels">
+               <li className="menu-item" data-tooltip="My Models">
                   <span className="material-symbols-outlined icon">wysiwyg</span>
                   {expanded && <span className='navbar-choice'>My Models</span>}
-                </Link>
-              </li>
+                </li>
+              </Link>
               <li className="menu-item" data-tooltip="Edit Profile" onClick={openProfilePopup}>
                 <span className="material-symbols-outlined icon">Edit</span>
                 {expanded && <span className='navbar-choice'>Edit Profile</span>}

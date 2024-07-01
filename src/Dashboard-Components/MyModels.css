@@ -1,15 +1,10 @@
-/* MyModels.css */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
 .models-container {
   top: 90px; /* Adjust this value based on the height of your navbar */
   padding: 20px;
   position: absolute;
   left: 40px; /* Default left position */
   transition: left 0.3s;
+  height: calc(100vh - 110px); /* Adjust height to fit within the viewport */
 }
 
 .expanded-navbar .models-container {
@@ -27,7 +22,8 @@ body {
   gap: 30px;
   margin: 0 auto;
   width: 100%; /* Adjust width to 100% */
-  max-width: 1500px; /* Optional: maximum width to mainta in layout */
+  max-width: 1500px; /* Optional: maximum width to maintain layout */
+  height: calc(100% - 50px); /* Set height to fill the container */
   overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
@@ -87,7 +83,6 @@ body {
   color: #FACC15;
 }
 
-/* Corrected the comment section */
 .model-details p strong {
   color: #000;
 }

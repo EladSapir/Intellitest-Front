@@ -71,17 +71,15 @@ const NavBar = ({ user, onLogout }) => {
           <div className="navbar-menu">
             <div className="menu-title">Menu</div>
             <ul>
-              <li className="menu-item" data-tooltip="Dashboard">
-                  <span className="material-symbols-outlined icon">space_dashboard</span>
-                  {expanded && <span className='navbar-choice'>Dashboard</span>}
-              </li>
               <li className="menu-item" data-tooltip="New Model" onClick={openAddModulePopup}>
                 <span className="material-symbols-outlined icon">library_add</span>
                 {expanded && <span className='navbar-choice'>New Model</span>}
               </li>
               <li className="menu-item" data-tooltip="My Models">
+                <Link to="/mymodels">
                   <span className="material-symbols-outlined icon">wysiwyg</span>
                   {expanded && <span className='navbar-choice'>My Models</span>}
+                </Link>
               </li>
               <li className="menu-item" data-tooltip="Edit Profile" onClick={openProfilePopup}>
                 <span className="material-symbols-outlined icon">Edit</span>
@@ -111,7 +109,6 @@ const NavBar = ({ user, onLogout }) => {
         </div>
         <div className={`content-container ${expanded ? 'expanded-navbar' : ''}`}>
           <Routes>
-            <Route path="/" element={<Dashboard user={user} onLogout={onLogout}/>} />
             <Route path="/mymodels" element={<MyModels expanded={expanded} />} />
             {/* Add other routes as needed */}
           </Routes>

@@ -34,12 +34,13 @@ body {
 .model-card {
   background: white;
   border-radius: 10px;
-  padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   width: 686px;
   height: 139px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .model-header {
@@ -68,6 +69,8 @@ body {
   height: 43px;
   justify-content: space-between;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .detail-item {

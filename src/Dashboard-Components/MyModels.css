@@ -27,7 +27,7 @@ body {
   gap: 30px;
   margin: 0 auto;
   width: 100%; /* Adjust width to 100% */
-  max-width: 1200px; /* Optional: maximum width to maintain layout */
+  max-width: 1500px; /* Optional: maximum width to mainta in layout */
   overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 

@@ -13,6 +13,7 @@
   top: 0;
   left: 0;
   transition: width 0.3s;
+  z-index: 1000; /* Ensure the navbar is on top */
 }
 
 .navbar.expanded {
@@ -245,8 +246,15 @@
 .content-container {
   margin-left: 80px;
   transition: margin-left 0.3s;
+  z-index: 1; /* Ensure content is below the navbar */
 }
 
 .navbar.expanded ~ .content-container {
   margin-left: 190px;
+}
+
+.logout-popup-overlay,
+.profile-popup-overlay,
+.add-module-popup-overlay {
+  z-index: 2000; /* Ensure popups are above the navbar */
 }

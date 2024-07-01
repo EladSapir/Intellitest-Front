@@ -10,6 +10,7 @@ body {
   margin-left: 40px; /* Default left margin */
   transition: margin-left 0.3s;
   z-index: 0; /* Ensure models container is below the navbar */
+  padding-top: 110px;
 }
 
 .expanded-navbar .models-container {

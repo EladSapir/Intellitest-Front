@@ -115,7 +115,7 @@ const NavBar = ({ user, onLogout }) => {
         </div>
         <div className={`content-container ${expanded ? 'expanded-navbar' : ''}`}>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            {/* <Route path="/" element={<Dashboard />} /> */}
             <Route path="/mymodels" element={<MyModels expanded={expanded} />} />
             {/* Add other routes as needed */}
           </Routes>

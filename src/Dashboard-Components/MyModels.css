@@ -25,7 +25,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Create a grid with 2 columns */
   gap: 30px;
-  margin: 0 auto;
+
   width: 100%; /* Adjust width to 100% */
   max-width: 1500px; /* Optional: maximum width to maintain layout */
 }

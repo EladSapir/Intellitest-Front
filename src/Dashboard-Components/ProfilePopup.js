@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ProfilePopup.css';
-import eyeIcon from '../Images/eye-icon.png';  
+import eyeIcon from '../Images/eye-icon.png';
+import DeleteConfirmationPopup from './DeleteConfirmationPopup'; // Import the new component
 
 const backend = process.env.REACT_APP_BACKEND_URL;
 
@@ -19,6 +20,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // New state
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,14 +36,13 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
       return;
     }
 
-    
     setError('');
     setSuccess('');
 
     try {
       const payload = {
         newfullname: userData.name,
-        email: user.email, 
+        email: user.email,
         newpassword: userData.password,
         newaccountType: userData.typeOfUse === 'Business'
       };
@@ -71,9 +72,9 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (password) => {
     try {
-      const response = await axios.post(`${backend}/user/delete`, { email: user.email });
+      const response = await axios.post(`${backend}/user/delete`, { email: user.email, password }); // Include password in payload
 
       if (response.status === 200) {
         console.log("User account deleted successfully");
@@ -124,10 +125,10 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         </div>
         <div className="profile-field">
           <label>Email Address</label>
-          <input 
-            type="email" 
-            value={userData.newEmail} 
-            name="newEmail" 
+          <input
+            type="email"
+            value={userData.newEmail}
+            name="newEmail"
             onChange={handleChange}
             placeholder="Email"
           />
@@ -135,7 +136,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         <div className="profile-field">
           <label>Password</label>
           <div className="password-input-container">
-            <input 
+            <input
               type={showPassword ? "text" : "password"}
               value={userData.password}
               name="password"
@@ -150,7 +151,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         <div className="profile-field">
           <label>Repeat Password</label>
           <div className="password-input-container">
-            <input 
+            <input
               type={showRepeatPassword ? "text" : "password"}
               value={userData.repeatPassword}
               name="repeatPassword"
@@ -166,16 +167,16 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
           <label>Type of use</label>
           <div>
             <input className="radio-button"
-              type="radio" 
-              name="typeOfUse" 
-              value="Private" 
+              type="radio"
+              name="typeOfUse"
+              value="Private"
               checked={userData.typeOfUse === 'Private'}
               onChange={handleChange}
             /> Private
             <input className="radio-button"
-              type="radio" 
-              name="typeOfUse" 
-              value="Business" 
+              type="radio"
+              name="typeOfUse"
+              value="Business"
               checked={userData.typeOfUse === 'Business'}
               onChange={handleChange}
             /> Business
@@ -187,11 +188,17 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         <div className="delete-account-section">
           <h3>Delete Account</h3>
           <p>Deleting your account would erase all your data, <strong>this step can't be undone!</strong></p>
-          <button className="delete-button" onClick={handleDelete}>Delete</button>
+          <button className="delete-button" onClick={() => setShowDeleteConfirmation(true)}>Delete</button>
           <button className="cancel-button" onClick={onClose}>Cancel</button>
         </div>
         <p className="note-message">Deleting your account would be possible only if there is no learning cycle live!</p>
       </div>
+      {showDeleteConfirmation && (
+        <DeleteConfirmationPopup
+          onConfirm={handleDelete}
+          onCancel={() => setShowDeleteConfirmation(false)}
+        />
+      )}
     </div>
   );
 };

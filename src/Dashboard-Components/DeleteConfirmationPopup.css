@@ -9,18 +9,19 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
-  }
+}
   
-  .delete-popup {
+.delete-popup {
     background: white;
-    padding: 20px;
+    width: 471px;
+    height: 248px;
     border-radius: 10px;
     position: relative;
-    text-align: center;
-    width: 400px;
-  }
+    text-align: left;
+    padding: 32px;
+}
   
-  .close-button {
+.close-button {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -28,22 +29,26 @@
     border: none;
     font-size: 20px;
     cursor: pointer;
-  }
+}
   
-  .password-input-container {
+.password-input-container {
     margin-top: 20px;
     position: relative;
     text-align: left;
-  }
+    width: 439px;
+    height: 69px;
+    margin-left: auto;
+    margin-right: auto;
+}
   
-  .password-input-container input {
-    width: calc(100% - 40px);
+.password-input-container input {
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
+}
   
-  .toggle-password {
+.toggle-password-visibility {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -51,29 +56,28 @@
     background: none;
     border: none;
     cursor: pointer;
-  }
+}
   
-  .toggle-password img {
+.toggle-password-visibility img {
     width: 20px;
     height: 20px;
-  }
+}
   
-  .delete-popup-buttons {
+.delete-popup-buttons {
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
-  }
+}
   
-  .delete-button {
+.delete-button {
     background-color: red;
     color: white;
-    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
   
-  .cancel-button {
+.cancel-button {
     background: none;
     color: #6c757d;
     font-size: 16px;
@@ -81,5 +85,19 @@
     text-decoration: underline;
     text-underline-offset: 3px;
     cursor: pointer;
-  }
+}
   
+.password-input {
+    width: 100%;
+    height: 42px;
+}
+
+.delete-popup-content {
+    width: 100%;
+    height: 137px;
+}
+  
+.delete-popup-header {
+    position: relative;
+    margin-left: 0;
+}

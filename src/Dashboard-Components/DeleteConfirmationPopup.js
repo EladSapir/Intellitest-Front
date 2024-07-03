@@ -22,18 +22,24 @@ const DeleteConfirmationPopup = ({ onConfirm, onCancel }) => {
     <div className="delete-popup-overlay">
       <div className="delete-popup">
         <button className="close-button" onClick={onCancel}>X</button>
-        <h2>Sad to see you leave :(</h2>
-        <p>Are you sure you want to delete your account?</p>
-        <div className="password-input-container">
-          <label>Enter password to authorize delete</label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <button type="button" className="toggle-password" onClick={toggleShowPassword}>
-            <img src={eye} alt="Toggle visibility" />
-          </button>
+        <div className="delete-popup-content">
+            <div className='delete-popup-header'>
+                <h2>Sad to see you leave :(</h2>
+                <p>Are you sure you want to delete your account?</p>
+            </div>
+            <div className="password-input-container">
+            <label>Enter password to authorize delete</label>
+                <div className="password-input">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <button type="button" className="toggle-password-visibility" onClick={toggleShowPassword}>
+                        <img src={eye} alt="Toggle visibility" />
+                    </button>
+                </div>
+            </div>
         </div>
         <div className="delete-popup-buttons">
           <button className="cancel-button" onClick={onCancel}>Cancel</button>

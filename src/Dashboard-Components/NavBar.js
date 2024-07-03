@@ -14,7 +14,6 @@ const NavBar = ({ user, onLogout }) => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [showAddModulePopup, setShowAddModulePopup] = useState(false);
-
   const handleMouseLeave = () => {
     setExpanded(false);
   };
@@ -111,7 +110,7 @@ const NavBar = ({ user, onLogout }) => {
         </div>
         <div className={`content-container ${expanded ? 'expanded-navbar' : ''}`}>
           <Routes>
-            <Route path="/mymodels" element={<MyModels expanded={expanded} />} />
+            <Route path="/mymodels" element={<MyModels user={currentUser} expanded={expanded} />} />
             {/* Add other routes as needed */}
           </Routes>
         </div>

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './AddModulePopup.css';
+
+const learningBackend = process.env.REACT_APP_TOOLKIT_LEARN_URL;
+
 
 const AddModulePopup = ({ isOpen, onClose, user }) => {
   const [step, setStep] = useState(1);
@@ -10,7 +14,6 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
   const [interval, setInterval] = useState('Manual running');
   const [errorMessage, setErrorMessage] = useState('');
   const [stepErrorMessage, setStepErrorMessage] = useState('');
-
   const toolkitDescriptions = {
     Imputer: 'Fills missing values in the dataset.',
     'Feature Selection': 'Selects the most relevant features for the model.',
@@ -61,8 +64,36 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
     }
   };
 
-  const handleSubmit = () => {
-  
+  const handleSubmit = async () => {
+    if (!csvFile) {
+      setErrorMessage('CSV file is required.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', csvFile);
+    formData.append('k', '7');
+    formData.append('target', 'Risk');
+    formData.append('checkboxes', toolkit.map(tool => tool ? 'true' : 'false').join(','));
+
+    try {
+      const response = await axios.post(`${learningBackend}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.data.success) {
+        console.log('File uploaded successfully', response.data.data);
+        // Handle the gist URLs here or pass them to another function
+      } else {
+        setErrorMessage('File upload failed: ' + response.data.message);
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      setErrorMessage('An error occurred while uploading the file.');
+    }
+
     onClose();
   };
 

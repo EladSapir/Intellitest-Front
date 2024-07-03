@@ -104,7 +104,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         <button className="close-button" onClick={onClose}>X</button>
         <h2>Profile</h2>
         <div className="profile-header">
-          <div className="profile-avatar">{userData.name.split(' ').map(n => n[0]).join('')}</div>
+          <div className="profile-avatar">{userData.name.split(' ').slice(0, 2).map(n => n[0]).join('')}</div>
           <div className="profile-name">
             {isEditingName ? (
               <input

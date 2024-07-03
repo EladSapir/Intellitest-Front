@@ -9,7 +9,7 @@ import Dashboard from '../Components/Dashboard';
 
 const NavBar = ({ user, onLogout }) => {
   const [currentUser, setCurrentUser] = useState(user);
-  const initials = currentUser.fullName.split(' ').map(n => n[0]).join('');
+  const initials = currentUser.fullName.split(' ').slice(0, 2).map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);

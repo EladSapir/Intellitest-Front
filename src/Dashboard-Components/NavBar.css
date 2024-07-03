@@ -225,14 +225,14 @@
   transform: translateY(-50%);
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 50%;
+  border-radius: 8px;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
 }
 
 .navbar.expanded .navbar-logo{
@@ -262,5 +262,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.toggle-button span{
+  font-size: 20px;
 }
 

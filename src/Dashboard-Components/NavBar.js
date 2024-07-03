@@ -101,7 +101,9 @@ const NavBar = ({ user, onLogout }) => {
             </ul>
           </div>
           <button className="toggle-button" onClick={toggleExpanded}>
-            {expanded ? '<' : '>'}
+            <span className="material-icons">
+              {expanded ? 'chevron_left' : 'chevron_right'}
+            </span>
           </button>
           <LogoutPopup show={showLogoutPopup} onClose={closeLogoutPopup} onLogout={onLogout} />
           {showProfilePopup && <ProfilePopup user={currentUser} onClose={closeProfilePopup} updateUser={updateUser} onLogout={onLogout} />}

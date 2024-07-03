@@ -27,7 +27,7 @@ const DeleteConfirmationPopup = ({ onConfirm, onCancel }) => {
                 <h2>Sad to see you leave :(</h2>
                 <p>Are you sure you want to delete your account?</p>
             </div>
-            <div className="password-input-container">
+            <div className="password-input-container-confirm">
             <label>Enter password to authorize delete</label>
                 <div className="password-input">
                     <input

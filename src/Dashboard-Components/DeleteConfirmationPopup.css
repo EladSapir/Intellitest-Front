@@ -31,7 +31,7 @@
     cursor: pointer;
 }
   
-.password-input-container {
+.password-input-container-confirm {
     margin-top: 20px;
     position: relative;
     text-align: left;
@@ -41,7 +41,7 @@
     margin-right: auto;
 }
   
-.password-input-container input {
+.password-input-container-confirm input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

@@ -81,6 +81,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials:true
       });
 
       if (response.data.success) {

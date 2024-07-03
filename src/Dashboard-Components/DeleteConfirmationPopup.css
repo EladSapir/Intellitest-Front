@@ -13,11 +13,11 @@
   
 .delete-popup {
     background: white;
-    width: 471px;
-    height: 248px;
+    width: 439px;
+    height: 216px;
     border-radius: 10px;
     position: relative;
-    text-align: left;
+    /* text-align: left; */
     padding: 32px;
 }
   
@@ -44,14 +44,18 @@
 .password-input-container-confirm input {
     width: 100%;
     padding: 10px;
+    width: 419px;
+    height: 22px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    display: block;
+
 }
   
 .toggle-password-visibility {
     position: absolute;
-    top: 50%;
-    right: 10px;
+    top:50%;
+    right: 5px;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -59,6 +63,8 @@
 }
   
 .toggle-password-visibility img {
+    margin-top: 30px;
+    
     width: 20px;
     height: 20px;
 }
@@ -66,7 +72,11 @@
 .delete-popup-buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: space-around;
+    /* margin-left: auto;
+    margin-right: auto; */
+    justify-content: center;
+    
+    gap:24px;
 }
   
 .delete-button {
@@ -88,6 +98,7 @@
 }
   
 .password-input {
+    margin-top: 8px;
     width: 100%;
     height: 42px;
 }
@@ -99,5 +110,28 @@
   
 .delete-popup-header {
     position: relative;
-    margin-left: 0;
+    margin-bottom: 24px;
+}
+
+.delete-popup-header h2{
+    margin:0;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.delete-popup-header p{
+    margin:0;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+.password-input-container-confirm label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.password-input-container-confirm input:focus {
+    border: 1px solid #FACC15;
+    outline: none;
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import './AddModulePopup.css';
 
 const learningBackend = process.env.REACT_APP_TOOLKIT_LEARN_URL;
-
+const backend = process.env.REACT_APP_BACKEND_URL;
 
 const AddModulePopup = ({ isOpen, onClose, user }) => {
   const [step, setStep] = useState(1);
@@ -66,37 +66,75 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
 
   const handleSubmit = async () => {
     if (!csvFile) {
-      setErrorMessage('CSV file is required.');
-      return;
+        setErrorMessage('CSV file is required.');
+        return;
     }
 
     const formData = new FormData();
     formData.append('file', csvFile);
     formData.append('k', '7');
     formData.append('target', 'Risk');
-    formData.append('checkboxes', toolkit.map(tool => tool ? 'true' : 'false').join(','));
+
+    const toolsOrder = ['Imputer', 'Encoder', 'Scaler', 'Feature Selection', 'Remove Outlayer'];
+    const selectedTools = toolsOrder.map(tool => toolkit.includes(tool) ? 'true' : 'false');
+
+    formData.append('checkboxes', selectedTools.join(','));
 
     try {
-      const response = await axios.post(`${learningBackend}/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        withCredentials:true
-      });
+        const response = await axios.post(`${learningBackend}/upload`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
 
-      if (response.data.success) {
-        console.log('File uploaded successfully', response.data.data);
-        // Handle the gist URLs here or pass them to another function
-      } else {
-        setErrorMessage('File upload failed: ' + response.data.message);
-      }
+        if (response.data.success) {
+            const [csvAfterToolKitGist, encodedCsv, scaledCsv, relativePathCsv] = response.data.data;
+            console.log('relative path:', relativePathCsv);
+
+            const newModelData = {
+                name: moduleName,
+                CSVpath: csvAfterToolKitGist,
+                encode_csv: encodedCsv,
+                scale_csv: scaledCsv,
+                user_id: user.id,
+                impute: selectedTools[0] === 'true',
+                encode: selectedTools[1] === 'true',
+                scale: selectedTools[2] === 'true',
+                feature_select: selectedTools[3] === 'true',
+                remove_outliers: selectedTools[4] === 'true'
+            };
+            console.log(response.data.data);
+
+            axios.post(`${backend}/model/newModel`, newModelData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.data.message) {
+                        console.log('Model added successfully', response.data.message);
+                    } else {
+                        console.error('Failed to add model:', response.data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error adding model:', error);
+                });
+
+            axios.post(`${learningBackend}/runImprovement`, { db: relativePathCsv }).catch(error => {
+                console.error('Error running improvement:', error);
+            });
+        } else {
+            setErrorMessage('File upload failed: ' + response.data.message);
+        }
     } catch (error) {
-      console.error('Error uploading file:', error);
-      setErrorMessage('An error occurred while uploading the file.');
+        console.error('Error uploading file:', error);
+        setErrorMessage('An error occurred while uploading the file.');
     }
 
     onClose();
-  };
+};
+  
 
   const renderProgressBars = () => {
     return (

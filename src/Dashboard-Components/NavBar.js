@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
@@ -14,6 +14,8 @@ const NavBar = ({ user, onLogout }) => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [showAddModulePopup, setShowAddModulePopup] = useState(false);
+  const myModelsRef = useRef();
+
   const handleMouseLeave = () => {
     setExpanded(false);
   };
@@ -44,6 +46,9 @@ const NavBar = ({ user, onLogout }) => {
 
   const closeAddModulePopup = () => {
     setShowAddModulePopup(false);
+    if (myModelsRef.current) {
+      myModelsRef.current.fetchModels();
+    }
   };
 
   const updateUser = (updatedUser) => {
@@ -74,8 +79,8 @@ const NavBar = ({ user, onLogout }) => {
                 <span className="material-symbols-outlined icon">library_add</span>
                 {expanded && <span className='navbar-choice'>New Model</span>}
               </li>
-              <Link to="/mymodels">
-               <li className="menu-item" data-tooltip="My Models">
+              <Link to="/mymodels" onClick={() => myModelsRef.current.fetchModels()}>
+                <li className="menu-item" data-tooltip="My Models">
                   <span className="material-symbols-outlined icon">wysiwyg</span>
                   {expanded && <span className='navbar-choice'>My Models</span>}
                 </li>
@@ -110,7 +115,7 @@ const NavBar = ({ user, onLogout }) => {
         </div>
         <div className={`content-container ${expanded ? 'expanded-navbar' : ''}`}>
           <Routes>
-            <Route path="/mymodels" element={<MyModels user={currentUser} expanded={expanded} />} />
+            <Route path="/mymodels" element={<MyModels user={currentUser} expanded={expanded} ref={myModelsRef} />} />
             {/* Add other routes as needed */}
           </Routes>
         </div>

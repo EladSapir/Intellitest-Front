@@ -104,15 +104,16 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
                 remove_outliers: selectedTools[4] === 'true'
             };
             console.log(response.data.data);
-
-            axios.post(`${backend}/model/newModel`, newModelData, {
+            let modelId = 0;
+            await axios.post(`${backend}/model/newModel`, newModelData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
                 .then(response => {
                     if (response.data.message) {
-                        console.log('Model added successfully', response.data.message);
+                        modelId = response.data.data;
+                        console.log( response.data.message);
                     } else {
                         console.error('Failed to add model:', response.data.error);
                     }
@@ -120,8 +121,13 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
                 .catch(error => {
                     console.error('Error adding model:', error);
                 });
-
-            axios.post(`${learningBackend}/runImprovement`, { db: relativePathCsv }).catch(error => {
+            const learnData ={
+              db:relativePathCsv,
+              user_id:user.id,
+              model_id:modelId,
+              modelType:'SVC'
+            }
+            axios.post(`${learningBackend}/runImprovement`, learnData ).catch(error => {
                 console.error('Error running improvement:', error);
             });
         } else {

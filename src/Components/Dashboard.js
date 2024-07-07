@@ -8,6 +8,9 @@ import DeleteModule from '../Dashboard-Components/DeleteModule';
 import './Dashboard.css';
 import axios from 'axios';
 
+const backend = process.env.REACT_APP_BACKEND_URL;
+const learningBackend = process.env.REACT_APP_TOOLKIT_LEARN_URL;
+
 const Dashboard = ({ user, onLogout }) => {
   const location = useLocation();
   const { model } = location.state;
@@ -20,7 +23,7 @@ const Dashboard = ({ user, onLogout }) => {
   });
 
   const [selectedFile, setSelectedFile] = useState(null);
-  const backend = process.env.REACT_APP_BACKEND_URL;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +46,7 @@ const Dashboard = ({ user, onLogout }) => {
     };
 
     fetchData();
-  }, [model._id, backend]);
+  }, [model._id]);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -54,27 +57,62 @@ const Dashboard = ({ user, onLogout }) => {
       alert("Please choose a file first");
       return;
     }
-
+  
     try {
       // Step 1: Make a POST request to get the model data using the model ID
       const modelResponse = await axios.post(`${backend}/model/getModel`, {
-        model_id: model._id
+        model_id: model._id,
       });
-
+  
       const modelData = modelResponse.data;
-      console.log("Model Data:", modelData);
-
+  
       // Step 2: Upload the selected file
       const formData = new FormData();
       formData.append('file', selectedFile);
-      formData.append('model_id', model._id);
-
-
+      formData.append('k', '7');
+      formData.append('target', 'Risk');
+      formData.append('checkboxes', `${modelData.impute},${modelData.encode},${modelData.scale},${modelData.feature_select},${modelData.remove_outliers}`);
+  
+      const response = await axios.post(`${learningBackend}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+  
+      const [csvAfterToolKitGist, encodedCsv, scaledCsv, relativePathCsv] = response.data.data;
+  
+      // Step 3: Update the model with the new data
+      const updateModel = {
+        model_id: modelData._id, // Ensure you're using the correct field from modelData
+        CSVpath: csvAfterToolKitGist,
+        encode_csv: encodedCsv,
+        scale_csv: scaledCsv,
+      };
+  
+      const updateRes = await axios.post(`${backend}/model/update`, updateModel, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      console.log("Response of update:", updateRes);
+  
+      // Step 4: Run improvement
+      const learnData = {
+        db: relativePathCsv,
+        user_id: user.id,
+        model_id: modelData._id,
+        modelType: 'SVC',
+      };
+  
+      await axios.post(`${learningBackend}/runImprovement`, learnData);
+  
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error('Error:', error);
     }
   };
-
+  
+  
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
@@ -108,7 +146,7 @@ const Dashboard = ({ user, onLogout }) => {
             <HistoryGraph />
             <ConfusionMatrix />
           </div>
-          <DeleteModule />
+          <DeleteModule user={user} modelId={model._id}/>
         </div>
       </div>
     </div>

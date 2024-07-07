@@ -13,6 +13,10 @@ body {
   padding-top: 110px;
 }
 
+.models-container.expanded-navbar {
+  margin-left: 180px; /* Expanded navbar width */
+}
+
 .expanded-navbar .models-container {
   margin-left: 40px; /* Adjusted left margin when navbar is expanded */
 }

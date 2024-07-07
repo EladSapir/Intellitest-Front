@@ -1,14 +1,16 @@
+// MyModels.js
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './MyModels.css';
 import axios from 'axios';
 
-const MyModels = forwardRef(({ user, expanded }, ref) => {
+const MyModels = forwardRef(({ user, navbarExpanded }, ref) => {
   const [currentUser, setCurrentUser] = useState(user);
   const [models, setModels] = useState([]);
   const [modelHistories, setModelHistories] = useState({});
   const backend = process.env.REACT_APP_BACKEND_URL;
   const navigate = useNavigate();
+  const location = useLocation();
 
   const fetchModels = async () => {
     try {
@@ -54,8 +56,10 @@ const MyModels = forwardRef(({ user, expanded }, ref) => {
     navigate(`/dashboard/${model._id}`, { state: { model, history: modelHistories[model._id] } });
   };
 
+  const alertMessage = location.state?.alert;
+
   return (
-    <div className={`models-container ${expanded ? 'expanded-navbar' : ''}`}>
+    <div className={`models-container ${navbarExpanded ? 'expanded-navbar' : ''}`}>
       <h1>My Models</h1>
       <div className="models-list">
         {models.map((model, index) => {

@@ -1,26 +1,28 @@
-import React, { useState, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+// NavBar.js
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import LogoutPopup from './LogoutPopup';
 import ProfilePopup from './ProfilePopup';
 import AddModulePopup from './AddModulePopup';
 
-const NavBar = ({ user, onLogout }) => {
+const NavBar = ({ user, onLogout, onToggleExpand, myModelsRef }) => {
   const [currentUser, setCurrentUser] = useState(user);
   const initials = currentUser.fullName.split(' ').slice(0, 2).map(n => n[0]).join('');
   const [expanded, setExpanded] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [showProfilePopup, setShowProfilePopup] = useState(false);
   const [showAddModulePopup, setShowAddModulePopup] = useState(false);
-  const myModelsRef = useRef();
   const navigate = useNavigate();
 
   const handleMouseLeave = () => {
     setExpanded(false);
+    onToggleExpand(false);
   };
 
   const toggleExpanded = () => {
     setExpanded(prevExpanded => !prevExpanded);
+    onToggleExpand(!expanded);
   };
 
   const openLogoutPopup = () => {

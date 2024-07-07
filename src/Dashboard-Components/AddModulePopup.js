@@ -46,11 +46,6 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
     );
   };
 
-  const handleDivClick = (e, value) => {
-    e.stopPropagation();
-    handleToolkitChange({ target: { value } });
-  };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type !== 'text/csv') {
@@ -89,7 +84,6 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
 
         if (response.data.success) {
             const [csvAfterToolKitGist, encodedCsv, scaledCsv, relativePathCsv] = response.data.data;
-            console.log('relative path:', relativePathCsv);
 
             const newModelData = {
                 name: moduleName,
@@ -217,7 +211,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
               <div className="toolkit-checkboxes">
                 {Object.keys(toolkitDescriptions).map((item) => (
                   <label key={item} className="tooltip-container-step">
-                    <div className="checkbox-wrapper" onClick={(e) => handleDivClick(e, item)}>
+                    <div className="checkbox-wrapper">
                       <input
                         type="checkbox"
                         value={item}

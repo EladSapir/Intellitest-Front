@@ -1,19 +1,60 @@
+// DeleteModule.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './DeleteModule.css';
-import eyeIcon from '../Images/eye-icon.png'; 
+import eyeIcon from '../Images/eye-icon.png';
+import axios from 'axios';
 
-const DeleteModule = () => {
+const backend = process.env.REACT_APP_BACKEND_URL;
+
+const DeleteModule = ({ user, modelId }) => {
   const [expanded, setExpanded] = useState(false);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleDelete = () => {
-    
-    alert('Module deleted');
+  const handleDelete = async () => {
+    try {
+      // Login request to verify the password
+      const loginResponse = await axios.post(`${backend}/user/login`, {
+        email: user.email,
+        password: password
+      });
+
+      if (loginResponse.status === 200) {
+        // Password is correct, proceed with delete request
+        await axios.post(`${backend}/model/deleteModel`, {
+          model_id: modelId,
+        });
+
+        // Navigate to models list with success message
+        navigate('/mymodels', { state: { alert: 'Model deleted successfully' } });
+      }
+    } catch (error) {
+      console.error('Error verifying password or deleting module:', error);
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400) {
+          if (data.error === 'Invalid password') {
+            setErrorMessage('Incorrect password. Please try again.');
+          } else if (data.error === 'User does not exist') {
+            setErrorMessage('User does not exist.');
+          } else {
+            setErrorMessage('Missing required fields.');
+          }
+        } else {
+          setErrorMessage('An error occurred while deleting the module.');
+        }
+      } else {
+        setErrorMessage('An error occurred while deleting the module.');
+      }
+    }
   };
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
+    setErrorMessage('');
   };
 
   const toggleShowPassword = () => {
@@ -53,6 +94,7 @@ const DeleteModule = () => {
                 <img src={eyeIcon} alt="Toggle Password Visibility" />
               </button>
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
           <div className="delete-module-buttons">
             <button className="cancel-button" onClick={toggleExpanded}>Cancel</button>

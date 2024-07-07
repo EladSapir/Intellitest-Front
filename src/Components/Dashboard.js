@@ -1,35 +1,79 @@
-
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../Dashboard-Components/NavBar';
 import HistoryGraph from '../Dashboard-Components/HistoryGraph';
 import ConfusionMatrix from '../Dashboard-Components/ConfusionMatrix';
 import StatusCard from '../Dashboard-Components/StatusCard';
 import DeleteModule from '../Dashboard-Components/DeleteModule';
 import './Dashboard.css';
+import axios from 'axios';
 
 const Dashboard = ({ user, onLogout }) => {
+  const location = useLocation();
+  const { model } = location.state;
+
   const [statusData, setStatusData] = useState({
-    liveLearningCycle: '',
     lastAccuracyPercentage: '',
     lastLearningCycle: '',
     lastLearningCycleTime: '',
-    isLearning: false
+    isLearning: false,
   });
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const backend = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
-    
-    fetch(`/api/status-data?userId=${user.id}`)
-      .then(response => response.json())
-      .then(data => {
-        setStatusData({
-          liveLearningCycle: data.liveLearningCycle,
-          lastAccuracyPercentage: data.lastAccuracyPercentage,
-          lastLearningCycle: data.lastLearningCycle,
-          lastLearningCycleTime: data.lastLearningCycleTime,
-          isLearning: data.isLearning
+    const fetchData = async () => {
+      try {
+        const historyResponse = await axios.post(`${backend}/modelHistory/history`, {
+          model_id: model._id
         });
+
+        const historyData = historyResponse.data;
+        setStatusData(prevStatusData => ({
+          ...prevStatusData,
+          lastAccuracyPercentage: historyData.accuracy || 'Pending',
+          lastLearningCycle: historyData.lastLearningCycle || 'Pending',
+          lastLearningCycleTime: historyData.updatedAt ? new Date(historyData.updatedAt).toLocaleString() : 'Pending',
+        }));
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [model._id, backend]);
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFile) {
+      alert("Please choose a file first");
+      return;
+    }
+
+    try {
+      // Step 1: Make a POST request to get the model data using the model ID
+      const modelResponse = await axios.post(`${backend}/model/getModel`, {
+        model_id: model._id
       });
-  }, [user.id]);
+
+      const modelData = modelResponse.data;
+      console.log("Model Data:", modelData);
+
+      // Step 2: Upload the selected file
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('model_id', model._id);
+
+
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
   return (
     <div className="dashboard-wrapper">
@@ -37,20 +81,6 @@ const Dashboard = ({ user, onLogout }) => {
         <NavBar user={user} onLogout={onLogout} />
         <div className="dashboard">
           <div className="status-cards">
-            {statusData.isLearning ? (
-              <StatusCard
-                title="Live Learning Cycle"
-                value={statusData.liveLearningCycle}
-                isLiveLearning={true}
-              />
-            ) : (
-              <StatusCard
-                title="New Learning Cycle"
-                value=""
-                icon="play_arrow"
-                iconColor="#FACC15"
-              />
-            )}
             <StatusCard
               title="Last Accuracy Percentage"
               value={statusData.lastAccuracyPercentage}
@@ -69,7 +99,9 @@ const Dashboard = ({ user, onLogout }) => {
               value=""
               icon="file_upload"
               iconColor="#FACC15"
-              link={{ url: "#", text: "Update" }}
+              link={{ url: "#", text: "Choose File" }}
+              onFileChange={handleFileChange}
+              onUpload={handleUpload}
             />
           </div>
           <div className="charts">

@@ -42,6 +42,9 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
+.model-card:hover{
+  cursor: pointer;
+}
 
 .model-header {
   display: flex;

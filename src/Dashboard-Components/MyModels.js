@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './MyModels.css';
 import axios from 'axios';
 
@@ -7,6 +8,7 @@ const MyModels = forwardRef(({ user, expanded }, ref) => {
   const [models, setModels] = useState([]);
   const [modelHistories, setModelHistories] = useState({});
   const backend = process.env.REACT_APP_BACKEND_URL;
+  const navigate = useNavigate();
 
   const fetchModels = async () => {
     try {
@@ -48,6 +50,10 @@ const MyModels = forwardRef(({ user, expanded }, ref) => {
     fetchModels();
   }, [currentUser.id, backend]);
 
+  const handleModelClick = (model) => {
+    navigate(`/dashboard/${model._id}`, { state: { model, history: modelHistories[model._id] } });
+  };
+
   return (
     <div className={`models-container ${expanded ? 'expanded-navbar' : ''}`}>
       <h1>My Models</h1>
@@ -58,7 +64,7 @@ const MyModels = forwardRef(({ user, expanded }, ref) => {
           const statusText = history ? 'Completed' : 'Pending';
 
           return (
-            <div className="model-card" key={index}>
+            <div className="model-card" key={index} onClick={() => handleModelClick(model)}>
               <div className="model-header">
                 <h2>{model.name}</h2>
                 <span className="model-type">{history?.modelType || 'N/A'}</span>

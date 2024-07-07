@@ -1,7 +1,7 @@
 import React from 'react';
 import './StatusCard.css';
 
-const StatusCard = ({ title, value, icon, iconColor, subtitle, link, isLiveLearning }) => {
+const StatusCard = ({ title, value, icon, iconColor, subtitle, link, isLiveLearning, onFileChange, onUpload }) => {
   return (
     <div className="status-card">
       <div className="content">
@@ -19,7 +19,13 @@ const StatusCard = ({ title, value, icon, iconColor, subtitle, link, isLiveLearn
           {subtitle && <small>{subtitle}</small>}
         </div>
       </div>
-      {link && <a href={link.url} className="status-link">{link.text}</a>}
+      {link && (
+        <div>
+          <input type="file" accept=".csv" onChange={onFileChange} style={{ display: 'none' }} id="file-upload" />
+          <label htmlFor="file-upload" className="file-upload-label">{link.text}</label>
+          <button onClick={onUpload} className="file-upload-button">Upload</button>
+        </div>
+      )}
     </div>
   );
 };

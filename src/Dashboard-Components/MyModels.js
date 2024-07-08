@@ -1,4 +1,3 @@
-// MyModels.js
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './MyModels.css';
@@ -56,6 +55,12 @@ const MyModels = forwardRef(({ user, navbarExpanded }, ref) => {
     navigate(`/dashboard/${model._id}`, { state: { model, history: modelHistories[model._id] } });
   };
 
+  const formatPercentage = (number) => {
+    let percentage = (number * 100).toFixed(4);
+    percentage = parseFloat(percentage).toString(); // Remove trailing zeros
+    return `${percentage}%`;
+  };
+
   const alertMessage = location.state?.alert;
 
   return (
@@ -85,7 +90,7 @@ const MyModels = forwardRef(({ user, navbarExpanded }, ref) => {
                   <p className='details-title'>Last Accuracy Percentage:</p>
                   <div className="model-info">
                     <span className="status-icon yellow-circle material-icons">track_changes</span>
-                    <p className='details-info'>{history?.accuracy ?? 'Pending'}</p>
+                    <p className='details-info'>{history ? formatPercentage(history.accuracy) : 'Pending'}</p>
                   </div>
                 </div>
                 <div className="detail-item">

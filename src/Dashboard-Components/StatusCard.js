@@ -15,17 +15,16 @@ const StatusCard = ({ title, value, icon, iconColor, subtitle, link, isLiveLearn
         )}
         <div className="text">
           <h3>{title}</h3>
-          <p>{value}</p>
           {subtitle && <small>{subtitle}</small>}
         </div>
-      </div>
-      {link && (
-        <div>
+        {link && (
+        <div className='upload-dashboard'>
           <input type="file" accept=".csv" onChange={onFileChange} style={{ display: 'none' }} id="file-upload" />
           <label htmlFor="file-upload" className="file-upload-label">{link.text}</label>
-          <button onClick={onUpload} className="file-upload-button">Upload</button>
+          <button onClick={onUpload} className="file-upload-button-dashboard"> <i className="material-icons">cloud_upload</i>Upload</button>
         </div>
       )}
+      </div>
     </div>
   );
 };

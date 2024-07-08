@@ -2,12 +2,13 @@
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 20px;
   flex: 1;
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between; /* Align content to both ends */
   gap: 20px;
+  width: 338px;
 }
 
 .status-card .content {
@@ -25,6 +26,7 @@
   font-size: 18px;
   font-weight: 400;
   color: #000;
+  width: 150px;
 }
 
 .text p {
@@ -36,9 +38,10 @@
 
 
 .text small {
-  display: block;
-  font-size: 14px;
-  color: #666;
+  position: inherit;
+  font-size: 25px;
+  font-weight: 520;
+  margin-left: 40px;
 }
 
 .status-link {
@@ -107,4 +110,32 @@
       transform: scale(1.2, 1.2);
       opacity: 0.0;
   }
+}
+
+.file-upload-button-dashboard {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  height: 20px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+}
+
+.file-upload-button-dashboard .material-icons {
+  margin-right: 8px;
+}
+
+.status-card .text {
+  display: flex;
+  align-items: center;
+}
+.upload-dashboard {
+
+  margin-right: 40px;
 }

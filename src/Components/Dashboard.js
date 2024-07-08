@@ -121,7 +121,7 @@ const Dashboard = ({ user, onLogout }) => {
           <div className="status-cards">
             <StatusCard
               title="Last Accuracy Percentage"
-              value={statusData.lastAccuracyPercentage}
+              subtitle={statusData.lastAccuracyPercentage}
               icon="track_changes"
               iconColor="#FACC15"
             />

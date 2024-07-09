@@ -68,9 +68,10 @@ const MyModels = forwardRef(({ user, navbarExpanded }, ref) => {
       <h1>My Models</h1>
       <div className="models-list">
         {models.map((model, index) => {
+          console.log(model.isRunning);
           const history = modelHistories[model._id];
-          const statusIconClass = history ? 'green-circle' : 'red-circle';
-          const statusText = history ? 'Completed' : 'Pending';
+          const statusIconClass = model.isRunning ? 'red-circle':'green-circle' ;
+          const statusText = model.isRunning ? 'Pending': 'Completed' ;
 
           return (
             <div className="model-card" key={index} onClick={() => handleModelClick(model)}>

@@ -70,7 +70,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
     formData.append('k', '7');
     formData.append('target', 'Risk');
 
-    const toolsOrder = ['Imputer', 'Encoder', 'Scaler', 'Feature Selection', 'Remove Outlayer'];
+    const toolsOrder = ['Imputer', 'Encoder', 'Scaler', 'Feature Selection', 'Remove Outliers'];
     const selectedTools = toolsOrder.map(tool => toolkit.includes(tool) ? 'true' : 'false');
 
     formData.append('checkboxes', selectedTools.join(','));

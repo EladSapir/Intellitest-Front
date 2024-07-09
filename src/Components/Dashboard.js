@@ -5,6 +5,7 @@ import HistoryGraph from '../Dashboard-Components/HistoryGraph';
 import ConfusionMatrix from '../Dashboard-Components/ConfusionMatrix';
 import StatusCard from '../Dashboard-Components/StatusCard';
 import DeleteModule from '../Dashboard-Components/DeleteModule';
+import BestParamsPopup from '../Dashboard-Components/BestParamsPopup'; // Import the new component
 import './Dashboard.css';
 import axios from 'axios';
 
@@ -31,6 +32,9 @@ const Dashboard = ({ user, onLogout }) => {
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [showParamsPopup, setShowParamsPopup] = useState(false); // State to control popup visibility
+  const [historyResponse, setHistoryResponse] = useState(null);
+  const [modelResponse, setModelResponse] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,11 +58,14 @@ const Dashboard = ({ user, onLogout }) => {
           falseNegative: historyData.confusion_matrix_fn,
         });
 
+        setHistoryResponse(historyData);
+
         const modelResponse = await axios.post(`${backend}/model/getModel`, {
           model_id: model._id,
         });
 
         setIsRunning(modelResponse.data.isRunning);
+        setModelResponse(modelResponse.data);
 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -87,8 +94,8 @@ const Dashboard = ({ user, onLogout }) => {
 
       const formData = new FormData();
       formData.append('file', selectedFile);
-      formData.append('k', '7');
-      formData.append('target', 'Risk');
+      formData.append('k', modelData.k);
+      formData.append('target', modelData.target);
       formData.append('checkboxes', `${modelData.impute},${modelData.encode},${modelData.scale},${modelData.feature_select},${modelData.remove_outliers}`);
 
       const response = await axios.post(`${learningBackend}/upload`, formData, {
@@ -126,6 +133,14 @@ const Dashboard = ({ user, onLogout }) => {
     } catch (error) {
       console.error('Error:', error);
     }
+  };
+
+  const handleShowParamsPopup = () => {
+    setShowParamsPopup(true);
+  };
+
+  const handleCloseParamsPopup = () => {
+    setShowParamsPopup(false);
   };
 
   return (
@@ -176,6 +191,17 @@ const Dashboard = ({ user, onLogout }) => {
           <DeleteModule user={user} modelId={model._id} />
         </div>
       </div>
+      <div className="dashboard-model-params">
+        <button onClick={handleShowParamsPopup}>
+          <h3>Click to Get Best Params of Last Learning Cycle</h3>
+        </button>
+      </div>
+      <BestParamsPopup 
+        show={showParamsPopup} 
+        onClose={handleCloseParamsPopup} 
+        historyResponse={historyResponse} 
+        modelResponse={modelResponse} 
+      />
     </div>
   );
 };

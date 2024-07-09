@@ -107,7 +107,6 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
           target: target,
           remove_outliers: selectedTools[4] === 'true'
         };
-        console.log(response.data.data);
         let modelId = 0;
         await axios.post(`${backend}/model/newModel`, newModelData, {
           headers: {
@@ -117,7 +116,6 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
           .then(response => {
             if (response.data.message) {
               modelId = response.data.data;
-              console.log(response.data.message);
             } else {
               console.error('Failed to add model:', response.data.error);
             }

@@ -34,3 +34,27 @@
   gap: 20px;
   justify-content: center; /* Center the charts */
 }
+
+.dashboard-model-params{
+  position: absolute;
+  /* top:125px; */
+  top:45%;
+  left: 1600px;
+  
+}
+.dashboard-model-params h3{
+  margin: 0;
+  font-weight: 300;
+}
+.dashboard-model-params button{
+  width: 150px;
+  height: 91px;
+  border: yellow;
+  padding:10px 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.dashboard-model-params :hover{
+cursor: pointer;
+}

@@ -194,7 +194,7 @@
   .Warning {
     font-size: 16px;
     font-weight: 400;
-    color:#6b7280;
+    color: red;
     margin:0;
     position:relative;
   }
@@ -369,4 +369,45 @@
 .step-5-button.prev-step-button {
   width: 150px; /* Adjusted width */
   right: 210px; /* Adjusted position to match the new width */
+}
+
+.add-model-target-input{
+  position: absolute;
+  top:200px;
+  display: inline;
+}
+.add-model-target-input h4{
+  margin-bottom: -10px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.add-model-target-input input[type='text']{
+  width: 150px;
+}
+
+.add-model-k-input{
+  left: 200px;
+  position: absolute;
+  top:200px;
+  display: inline;
+}
+.add-model-k-input h4{
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.add-model-k-input input[type='number']{
+  width: 50px;
+  height: 20px;
+  padding: 10px;
+  border: 1px solid #c0c0c0;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.step3-error{
+  position: absolute;
+  top:265px;
 }

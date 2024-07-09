@@ -68,7 +68,6 @@ const MyModels = forwardRef(({ user, navbarExpanded }, ref) => {
       <h1>My Models</h1>
       <div className="models-list">
         {models.map((model, index) => {
-          console.log(model.isRunning);
           const history = modelHistories[model._id];
           const statusIconClass = model.isRunning ? 'red-circle':'green-circle' ;
           const statusText = model.isRunning ? 'Pending': 'Completed' ;

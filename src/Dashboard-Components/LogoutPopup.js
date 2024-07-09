@@ -19,7 +19,7 @@ const LogoutPopup = ({ show, onClose, onLogout }) => {
         <p>Are you sure you want to log out?</p>
         <div className="logout-popup-buttons">
           <button className="logout-button" onClick={handleLogout}>Logout</button>
-          <button className="stay-in-button" onClick={onClose}>Cancel</button>
+          <button className="stay-in-button btn-landingpage" onClick={onClose}>Cancel</button>
         </div>
       </div>
     </div>

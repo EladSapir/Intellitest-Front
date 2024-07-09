@@ -60,18 +60,10 @@
   }
   
   .stay-in-button {
-    background-color: #FDE047;
-    color: black;
+
     font-size: 16px;
     font-weight: bold;
-    border-radius: 10px;
-    padding: 10px 25px;
-    border: 2px solid #FACC15;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    padding: 5px 30px;
   }
-  
-  .stay-in-button:hover {
-    background-color: #fff8c6;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+
   

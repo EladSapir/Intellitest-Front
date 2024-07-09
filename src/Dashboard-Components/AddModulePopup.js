@@ -14,6 +14,8 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
   const [interval, setInterval] = useState('Manual running');
   const [errorMessage, setErrorMessage] = useState('');
   const [stepErrorMessage, setStepErrorMessage] = useState('');
+  const [target, setTarget] = useState('');
+  const [k, setK] = useState(5);
   const toolkitDescriptions = {
     Imputer: 'Fills missing values in the dataset.',
     'Feature Selection': 'Selects the most relevant features for the model.',
@@ -31,13 +33,19 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
       setStepErrorMessage('Module Name is required.');
     } else if (step === 2 && !csvFile) {
       setStepErrorMessage('Please upload a CSV file.');
+    } else if (step === 3 && !target) {
+      setStepErrorMessage('Target is required.');
     } else {
       setStepErrorMessage('');
       setStep(step + 1);
     }
   };
 
-  const prevStep = () => setStep(step - 1);
+  const prevStep = () =>{ 
+    setStep(step - 1);
+    setStepErrorMessage('');
+  }
+
 
   const handleToolkitChange = (e) => {
     const value = e.target.value;
@@ -61,80 +69,82 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
 
   const handleSubmit = async () => {
     if (!csvFile) {
-        setErrorMessage('CSV file is required.');
-        return;
+      setErrorMessage('CSV file is required.');
+      return;
     }
-
+   
     const formData = new FormData();
     formData.append('file', csvFile);
-    formData.append('k', '7');
-    formData.append('target', 'Risk');
-
+    formData.append('k', toolkit.includes('Feature Selection') ? k : 5);
+    formData.append('target', target);
+   
     const toolsOrder = ['Imputer', 'Encoder', 'Scaler', 'Feature Selection', 'Remove Outliers'];
     const selectedTools = toolsOrder.map(tool => toolkit.includes(tool) ? 'true' : 'false');
-
+   
     formData.append('checkboxes', selectedTools.join(','));
-
+   
     try {
-        const response = await axios.post(`${learningBackend}/upload`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
-
-        if (response.data.success) {
-            const [csvAfterToolKitGist, encodedCsv, scaledCsv, relativePathCsv] = response.data.data;
-
-            const newModelData = {
-                name: moduleName,
-                CSVpath: csvAfterToolKitGist,
-                encode_csv: encodedCsv,
-                scale_csv: scaledCsv,
-                user_id: user.id,
-                impute: selectedTools[0] === 'true',
-                encode: selectedTools[1] === 'true',
-                scale: selectedTools[2] === 'true',
-                feature_select: selectedTools[3] === 'true',
-                remove_outliers: selectedTools[4] === 'true'
-            };
-            console.log(response.data.data);
-            let modelId = 0;
-            await axios.post(`${backend}/model/newModel`, newModelData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-                .then(response => {
-                    if (response.data.message) {
-                        modelId = response.data.data;
-                        console.log( response.data.message);
-                    } else {
-                        console.error('Failed to add model:', response.data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error adding model:', error);
-                });
-            const learnData ={
-              db:relativePathCsv,
-              user_id:user.id,
-              model_id:modelId,
-              modelType:'SVC'
+      const response = await axios.post(`${learningBackend}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+   
+      if (response.data.success) {
+        const [csvAfterToolKitGist, encodedCsv, scaledCsv, relativePathCsv] = response.data.data;
+   
+        const newModelData = {
+          name: moduleName,
+          CSVpath: csvAfterToolKitGist,
+          encode_csv: encodedCsv,
+          scale_csv: scaledCsv,
+          user_id: user.id,
+          impute: selectedTools[0] === 'true',
+          encode: selectedTools[1] === 'true',
+          scale: selectedTools[2] === 'true',
+          feature_select: selectedTools[3] === 'true',
+          k: k,
+          target: target,
+          remove_outliers: selectedTools[4] === 'true'
+        };
+        console.log(response.data.data);
+        let modelId = 0;
+        await axios.post(`${backend}/model/newModel`, newModelData, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => {
+            if (response.data.message) {
+              modelId = response.data.data;
+              console.log(response.data.message);
+            } else {
+              console.error('Failed to add model:', response.data.error);
             }
-            axios.post(`${learningBackend}/runImprovement`, learnData ).catch(error => {
-                console.error('Error running improvement:', error);
-            });
-        } else {
-            setErrorMessage('File upload failed: ' + response.data.message);
+          })
+          .catch(error => {
+            console.error('Error adding model:', error);
+          });
+        const learnData = {
+          db: relativePathCsv,
+          user_id: user.id,
+          model_id: modelId,
+          modelType: 'SVC'
         }
+        axios.post(`${learningBackend}/runImprovement`, learnData).catch(error => {
+          console.error('Error running improvement:', error);
+        });
+      } else {
+        setErrorMessage('File upload failed: ' + response.data.message);
+      }
     } catch (error) {
-        console.error('Error uploading file:', error);
-        setErrorMessage('An error occurred while uploading the file.');
+      console.error('Error uploading file:', error);
+      setErrorMessage('An error occurred while uploading the file.');
+      alert("The model could'nt be created and start learn, try again");
     }
-
+   
     onClose();
-};
-  
+  }
 
   const renderProgressBars = () => {
     return (
@@ -195,7 +205,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
                 <i className="material-icons">cloud_upload</i>
                 Click To Upload File
               </label>
-              <h5 className='Warning'>*Module with images should be created as a separate CSV file</h5>
+              <h5 className='Warning'>*The target column should be the last one in the CSV</h5>
               {errorMessage && <p className="error-message-step">*{errorMessage}</p>}
               {!errorMessage && stepErrorMessage && <p className="error-message-step">*{stepErrorMessage}</p>}
               <button className="prev-step-button" onClick={prevStep}>Go Back</button>
@@ -227,6 +237,27 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
                   </label>
                 ))}
               </div>
+              <div className='add-model-target-input'>
+                <h4>Target:</h4>
+                <input
+                  type="text"
+                  value={target}
+                  onChange={(e) => setTarget(e.target.value)}
+                  placeholder="Target"
+                />
+              </div>
+              {toolkit.includes('Feature Selection') && (
+                <div className='add-model-k-input'>
+                  <h4>K:</h4>
+                  <input
+                    type="number"
+                    value={k}
+                    onChange={(e) => setK(e.target.value)}
+                    placeholder="K"
+                  />
+                </div>
+              )}
+              {stepErrorMessage && <p className="error-message-step step3-error">*{stepErrorMessage}</p>}
               <button className="prev-step-button" onClick={prevStep}>Go Back</button>
               <button className="next-step-button" onClick={nextStep}>Next Step</button>
               {renderProgressBars()}

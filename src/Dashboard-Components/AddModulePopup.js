@@ -124,6 +124,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
           })
           .catch(error => {
             console.error('Error adding model:', error);
+            alert('The name of the model you chose already exists in your list');
           });
         const learnData = {
           db: relativePathCsv,

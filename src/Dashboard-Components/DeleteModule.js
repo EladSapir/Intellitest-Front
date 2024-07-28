@@ -66,7 +66,7 @@ const DeleteModule = ({ user, modelId }) => {
       <div className="delete-module-header">
         <div className="delete-module-content" onClick={toggleExpanded}>
           <i className="fas fa-trash-alt"></i>
-          <span>Delete Module</span>
+          <span>Delete Model</span>
         </div>
         {!expanded && (
           <button onClick={toggleExpanded} className="delete-button">Delete</button>

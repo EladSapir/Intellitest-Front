@@ -46,9 +46,9 @@ const Dashboard = ({ user, onLogout }) => {
         const historyData = historyResponse.data;
         setStatusData(prevStatusData => ({
           ...prevStatusData,
-          lastAccuracyPercentage: historyData.accuracy || 'Pending',
-          lastLearningCycle: historyData.lastLearningCycle || 'Pending',
-          lastLearningCycleTime: historyData.updatedAt ? new Date(historyData.updatedAt).toLocaleString() : 'Pending',
+          lastAccuracyPercentage: historyData.accuracy || 'Waiting',
+          lastLearningCycle: historyData.lastLearningCycle || 'Waiting',
+          lastLearningCycleTime: historyData.updatedAt ? new Date(historyData.updatedAt).toLocaleString() : 'Waiting',
         }));
 
         setConfusionMatrixData({
@@ -192,6 +192,7 @@ const Dashboard = ({ user, onLogout }) => {
         </div>
       </div>
       <div className="dashboard-model-params">
+      <h2>{model.name}</h2>
         <button onClick={handleShowParamsPopup}>
           <h3>Click to Get Best Params of Last Learning Cycle</h3>
         </button>

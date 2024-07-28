@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './ProfilePopup.css';
 import eyeIcon from '../Images/eye-icon.png';
-import DeleteConfirmationPopup from './DeleteConfirmationPopup'; // Import the new component
+import DeleteConfirmationPopup from './DeleteConfirmationPopup';
 
 const backend = process.env.REACT_APP_BACKEND_URL;
 
@@ -20,7 +20,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
   const [isEditingName, setIsEditingName] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false); // New state
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,8 +73,16 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
   };
 
   const handleDelete = async (password) => {
+    if (!password) {
+      setError('Please enter your password to delete the account');
+      return;
+    }
+
+    setError('');
+    setSuccess('');
+
     try {
-      const response = await axios.post(`${backend}/user/delete`, { email: user.email, password }); // Include password in payload
+      const response = await axios.post(`${backend}/user/delete`, { email: user.email, password });
 
       if (response.status === 200) {
         console.log("User account deleted successfully");
@@ -182,7 +190,6 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
             /> Business
           </div>
         </div>
-        {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
         <button className="update-button" onClick={handleUpdate}>Update</button>
         <div className="delete-account-section">
@@ -197,6 +204,7 @@ const ProfilePopup = ({ user, onClose, updateUser, onLogout }) => {
         <DeleteConfirmationPopup
           onConfirm={handleDelete}
           onCancel={() => setShowDeleteConfirmation(false)}
+          error={error}
         />
       )}
     </div>

@@ -30,7 +30,7 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
 
   const nextStep = () => {
     if (step === 1 && !moduleName) {
-      setStepErrorMessage('Module Name is required.');
+      setStepErrorMessage(' Name is required.');
     } else if (step === 2 && !csvFile) {
       setStepErrorMessage('Please upload a CSV file.');
     } else if (step === 3 && !target) {
@@ -170,12 +170,12 @@ const AddModulePopup = ({ isOpen, onClose, user }) => {
 
           {step === 1 && (
             <div className="popup-step">
-              <p className='title-steps'>Choose Name for your module</p>
+              <p className='title-steps'>Choose Name for your model</p>
               <input
                 type="text"
                 value={moduleName}
                 onChange={(e) => setModuleName(e.target.value)}
-                placeholder="Module Name"
+                placeholder="Model Name"
               />
               {stepErrorMessage && <p className="error-message-step">*{stepErrorMessage}</p>}
               <button className="next-step-button" onClick={nextStep}>Next Step</button>

@@ -10,7 +10,7 @@ const Header = () => (
         </div>
         <div className="nav-links">
             <a href="#contribute">Contact Us</a>
-            <a href="#">Buy us a coffee</a>
+            <a href="https://buymeacoffee.com/intellitestisrael">Buy us a coffee</a>
         </div>
     </div>
 );
